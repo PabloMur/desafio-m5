@@ -1,0 +1,9 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initPageWelcome", ()=>initPageWelcome
+);
+function initPageWelcome() {
+    const div = document.createElement("div");
+    div.innerHTML = `\n            <h1>Page A</h1>\n            <custom-text variant="title">\n            Te damos la bienvenida a esta página\n          </custom-text>\n            <custom-button>perro</custom-button>\n            <custom-button class="start-button">cavernicola</custom-button>\n          `;
+    return div;
+}

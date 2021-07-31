@@ -1,0 +1,7 @@
+var _router = require("./router");
+var _button = require("./components/button");
+(function main() {
+    _button.initCustomButton();
+    const container = document.querySelector("#root");
+    _router.initRouter(container);
+})();

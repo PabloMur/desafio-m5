@@ -1,0 +1,37 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initRouter", ()=>initRouter
+);
+var _welcome = require("./pages/welcome");
+var _instructions = require("./pages/instructions");
+const routes = [
+    {
+        path: /\/welcome/,
+        handler: _welcome.initPageWelcome
+    },
+    {
+        path: /\/instructions/,
+        handler: _instructions.initPageInstructions
+    }, 
+];
+function initRouter(container) {
+    function goTo(path) {
+        history.pushState({
+        }, "", path);
+        handleRoute(path);
+    }
+    function handleRoute(route) {
+        for (const r of routes)if (r.path.test(route)) {
+            const el = r.handler({
+                goTo: goTo
+            });
+            if (container.firstChild) container.firstChild.remove();
+            container.appendChild(el);
+        }
+    }
+    if (location.pathname == "/") goTo("/welcome");
+    else handleRoute(location.pathname);
+    window.addEventListener("popstate", ()=>{
+        handleRoute(location.pathname);
+    });
+}
