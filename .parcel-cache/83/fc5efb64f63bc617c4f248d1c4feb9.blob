@@ -1,0 +1,1 @@
+{"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA","sources":["src/pages/welcome/index.css"],"sourcesContent":[".welcome {\n  height: 100%;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n"],"names":[],"version":3,"file":"index.HASH_REF_f3e0b8f46119dfe57da49367ef04b2af.css.map","sourceRoot":"/__parcel_source_root/"}

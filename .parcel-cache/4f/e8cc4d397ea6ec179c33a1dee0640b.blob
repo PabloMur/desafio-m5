@@ -1,0 +1,7 @@
+.containerManos {
+  display: flex;
+  height: 100px;
+  width: 100%;
+}
+
+/*# sourceMappingURL=index.HASH_REF_91ffe6961ecae75c6af612bccde04e5f.css.map */

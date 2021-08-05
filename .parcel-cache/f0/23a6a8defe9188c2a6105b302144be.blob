@@ -1,0 +1,6 @@
+.titulo {
+  color: #009048;
+  background: tomato;
+  height: 50vh;
+  width: 100%;
+}

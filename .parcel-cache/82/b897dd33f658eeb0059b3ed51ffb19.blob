@@ -1,0 +1,10 @@
+var _router = require("./router");
+var _button = require("./components/button");
+var _customText = require("./components/custom-text");
+(function main() {
+    _button.initCustomButton();
+    _customText.initCustomText();
+    initPageWelcome();
+    const container = document.querySelector("#root");
+    _router.initRouter(container);
+})();

@@ -1,0 +1,1 @@
+module.exports = require('./bundle-url').getBundleURL() + "tijera.HASH_REF_8f8cc1e6477f7cae57f05c86910deb35.svg";

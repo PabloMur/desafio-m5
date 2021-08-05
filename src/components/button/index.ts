@@ -17,11 +17,12 @@ export function initCustomButton() {
         style.innerHTML = `
               .root{
                   font-size: 18px;
-                  border: solid 2px;
                   border-radius: 4px;
                   padding: 17px 13px;
-                  background-color: #9CBBE9;
+                  background-color:#006CFC;
+                  color:#D8FCFC;
                   width: 100%;
+                  border: 10px solid #001997;
               }
             `;
 

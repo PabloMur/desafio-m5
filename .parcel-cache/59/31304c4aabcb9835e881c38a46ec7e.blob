@@ -1,0 +1,16 @@
+.gameObject {
+  width: auto;
+  height: 100%;
+  background-image: url("tijera.HASH_REF_65b62a623cdda6caf8e64f00b2473dd4.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.container {
+  display: flex;
+  height: 100px;
+  width: 100%;
+}
+
+/*# sourceMappingURL=index.HASH_REF_91ffe6961ecae75c6af612bccde04e5f.css.map */

@@ -384,14 +384,16 @@ function hmrAcceptRun(bundle/*: ParcelRequire */ , id/*: string */ ) {
 var _router = require("./router");
 var _button = require("./components/button");
 var _customText = require("./components/custom-text");
+var _gameOption = require("./components/game-option");
 (function main() {
     _button.initCustomButton();
     _customText.initCustomText();
+    _gameOption.initGameItem();
     const container = document.querySelector("#root");
     _router.initRouter(container);
 })();
 
-},{"./router":"57npn","./components/button":"62CCj","./components/custom-text":"5UP4W"}],"57npn":[function(require,module,exports) {
+},{"./router":"57npn","./components/button":"62CCj","./components/custom-text":"5UP4W","./components/game-option":"53Yk1"}],"57npn":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initRouter", ()=>initRouter
@@ -433,21 +435,22 @@ function initRouter(container) {
             container.appendChild(el);
         }
     }
-    if (location.pathname == "/") goTo("/welcome");
+    if (location.pathname == "/" || location.pathname == "/desafio-m5") goTo("/welcome");
     else handleRoute(location.pathname);
     window.addEventListener("popstate", ()=>{
         handleRoute(location.pathname);
     });
 }
 
-},{"./pages/welcome":"1yAyO","./pages/instructions":"7Li4L","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","./pages/choose":"2j31B","./pages/result":"2WB0S"}],"1yAyO":[function(require,module,exports) {
+},{"./pages/welcome":"1yAyO","./pages/instructions":"7Li4L","./pages/choose":"2j31B","./pages/result":"2WB0S","@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}],"1yAyO":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initPageWelcome", ()=>initPageWelcome
 );
 function initPageWelcome(params) {
     const div = document.createElement("div");
-    div.innerHTML = `\n            <custom-text variant="title">\n            Piedra\n            Papel\n            Tijera\n            </custom-text> \n            <custom-button class="start-button">¡Empezar!</custom-button>\n          `;
+    div.className = "welcome";
+    div.innerHTML = `\n            <custom-text variant="title" class="titulo">\n              Piedra <br/>Papel<br/> Tijera\n            </custom-text> \n            <custom-button class="start-button">¡Empezar!</custom-button>\n            <div class="containerManos">\n              <game-item variant="tijera"></game-item>\n              <game-item variant="piedra"></game-item>\n              <game-item variant="papel"></game-item>\n            </div>\n          `;
     const button = div.querySelector(".start-button");
     button.addEventListener("click", function() {
         params.goTo("/instructions");
@@ -494,8 +497,9 @@ parcelHelpers.export(exports, "initPageInstructions", ()=>initPageInstructions
 );
 function initPageInstructions(params) {
     const div = document.createElement("div");
-    div.innerHTML = `\n            <h1>Page A</h1>\n          `;
-    div.addEventListener("click", ()=>{
+    div.innerHTML = `\n            <h1>Presioná jugar\n            y elegí: piedra, papel o tijera antes de que pasen los 3 segundos.</h1>\n            <custom-button class="play-button">¡Jugar!</custom-button>\n          `;
+    const playButton = div.querySelector(".play-button");
+    playButton.addEventListener("click", ()=>{
         params.goTo("/choose");
     });
     return div;
@@ -508,7 +512,7 @@ parcelHelpers.export(exports, "initPageChoose", ()=>initPageChoose
 );
 function initPageChoose(params) {
     const div = document.createElement("div");
-    div.innerHTML = `\n              <h1>Choose</h1>\n            `;
+    div.innerHTML = `\n              <h1>Contador</h1>\n              <div class="containerManos">\n                <game-item variant="tijera"></game-item>\n                <game-item variant="piedra"></game-item>\n                <game-item variant="papel"></game-item>\n            </div>\n            `;
     div.addEventListener("click", ()=>{
         params.goTo("/result");
     });
@@ -522,7 +526,7 @@ parcelHelpers.export(exports, "initPageResult", ()=>initPageResult
 );
 function initPageResult(params) {
     const div = document.createElement("div");
-    div.innerHTML = `\n                <h1>Result</h1>\n              `;
+    div.innerHTML = `\n                <h1>Result</h1>\n                <custom-button>¡Volver a Jugar!</custom-button>\n              `;
     div.addEventListener("click", ()=>{
         params.goTo("/welcome");
     });
@@ -548,7 +552,7 @@ function initCustomButton() {
             const button = document.createElement("button");
             const style = document.createElement("style");
             button.className = "root";
-            style.innerHTML = `\n              .root{\n                  font-size: 18px;\n                  border: solid 2px;\n                  border-radius: 4px;\n                  padding: 17px 13px;\n                  background-color: #9CBBE9;\n                  width: 100%;\n              }\n            `;
+            style.innerHTML = `\n              .root{\n                  font-size: 18px;\n                  border-radius: 4px;\n                  padding: 17px 13px;\n                  background-color:#006CFC;\n                  color:#D8FCFC;\n                  width: 100%;\n                  border: 10px solid #001997;\n              }\n            `;
             button.textContent = this.textContent || "papa";
             shadow.appendChild(button);
             shadow.appendChild(style);
@@ -574,7 +578,7 @@ function initCustomText() {
             });
             const div = document.createElement("div");
             const style = document.createElement("style");
-            style.innerHTML = `\n        .title{\n            font-size:52px;\n            font-weight: bold;\n        }\n        .body{\n            font-size: 18px;\n        }\n      \n      `;
+            style.innerHTML = `\n        .title{\n            font-size:80px;\n            font-weight: bold;\n            color: #009048;\n        }\n        .body{\n            font-size: 18px;\n        }\n      \n      `;
             div.className = variant;
             div.textContent = this.textContent;
             shadow.appendChild(div);
@@ -584,6 +588,77 @@ function initCustomText() {
     customElements.define("custom-text", CustomText);
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}]},["1VVWy","2slnh"], "2slnh", "parcelRequirea5a0")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}],"53Yk1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initGameItem", ()=>initGameItem
+);
+function initGameItem() {
+    customElements.define("game-item", class extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            const imageTijera = require("url:./img/tijera.svg");
+            const imagePiedra = require("url:./img/piedra.svg");
+            const imagePapel = require("url:./img/papel.svg");
+            let imageURL = "hola";
+            const variant = this.getAttribute("variant");
+            const shadow = this.attachShadow({
+                mode: "open"
+            });
+            const div = document.createElement("div");
+            const style = document.createElement("style");
+            if (variant == "tijera") imageURL = imageTijera;
+            if (variant == "piedra") imageURL = imagePiedra;
+            if (variant == "papel") imageURL = imagePapel;
+            div.className = "gameObject";
+            div.innerHTML = `\n        <img src="${imageURL}">\n        `;
+            style.innerHTML = `\n        .gameObject {\n          width: auto;\n          height: 100%;\n        }        \n        `;
+            shadow.appendChild(div);
+            shadow.appendChild(style);
+        }
+    });
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR","url:./img/tijera.svg":"3j4qi","url:./img/piedra.svg":"eSFOi","url:./img/papel.svg":"1LQHj"}],"3j4qi":[function(require,module,exports) {
+module.exports = require('./bundle-url').getBundleURL() + "tijera.7da0cc86.svg";
+
+},{"./bundle-url":"3seVR"}],"3seVR":[function(require,module,exports) {
+"use strict";
+/* globals document:readonly */ var bundleURL = null;
+function getBundleURLCached() {
+    if (!bundleURL) bundleURL = getBundleURL();
+    return bundleURL;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+        if (matches) return getBaseURL(matches[0]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    let matches = ('' + url).match(/(https?|file|ftp):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"eSFOi":[function(require,module,exports) {
+module.exports = require('./bundle-url').getBundleURL() + "piedra.9375442b.svg";
+
+},{"./bundle-url":"3seVR"}],"1LQHj":[function(require,module,exports) {
+module.exports = require('./bundle-url').getBundleURL() + "papel.cc3eb3fd.svg";
+
+},{"./bundle-url":"3seVR"}]},["1VVWy","2slnh"], "2slnh", "parcelRequirea5a0")
 
 //# sourceMappingURL=index.a2d33e8d.js.map

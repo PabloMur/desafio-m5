@@ -1,0 +1,5 @@
+.titulo {
+  color: #009048;
+  height: 50vh;
+  width: 100%;
+}

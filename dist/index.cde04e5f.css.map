@@ -1,0 +1,1 @@
+{"mappings":"AAAA;AACA;AACA;AACA;AACA","sources":["src/components/game-option/index.css"],"sourcesContent":[".containerManos {\n  display: flex;\n  height: 100px;\n  width: 100%;\n}\n"],"names":[],"version":3,"file":"index.cde04e5f.css.map","sourceRoot":"/__parcel_source_root/"}

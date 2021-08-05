@@ -1,0 +1,5 @@
+.gameObject {
+  width: 30%;
+  height: 50px;
+  background-image: url("d2dc10608f28f35bd8e4e97aa18e421b");
+}

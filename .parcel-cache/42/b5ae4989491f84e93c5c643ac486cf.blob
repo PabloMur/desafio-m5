@@ -1,0 +1,8 @@
+.gameObject {
+  width: auto;
+  height: 100%;
+  background-image: url("4bddd451f2ce3862ab31dfc450a5eb9a");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}

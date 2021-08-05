@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: "Odibee Sans", cursive;
 }
 
 body {
@@ -8,8 +9,16 @@ body {
 }
 
 #root {
-  background: brown;
+  background: white;
+  background-image: url("fondo.228ccc65.svg");
   height: 100vh;
+  width: 100%;
+  padding: 15px;
+}
+
+.containerManos {
+  display: flex;
+  height: 100px;
   width: 100%;
 }
 

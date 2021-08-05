@@ -1,0 +1,16 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  background: white;
+  background-image: url("c86c7fa546f8a65d8847e581d4e12ee4");
+
+  height: 100vh;
+  width: 100%;
+}

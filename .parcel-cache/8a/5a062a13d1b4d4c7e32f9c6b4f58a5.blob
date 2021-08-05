@@ -1,0 +1,17 @@
+.welcome {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.titulo {
+  color: #009048;
+  font-size: 80px;
+  height: 50vh;
+  width: 100%;
+}
+
+/*# sourceMappingURL=index.HASH_REF_f3e0b8f46119dfe57da49367ef04b2af.css.map */

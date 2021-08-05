@@ -1,0 +1,25 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initGameItem", ()=>initGameItem
+);
+const imageURL = require("url:./img/tijera.svg");
+function initGameItem() {
+    customElements.define("game-item", class extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            const shadow = this.attachShadow({
+                mode: "open"
+            });
+            const div = document.createElement("div");
+            const style = document.createElement("style");
+            div.className = "gameObject";
+            div.innerHTML = `\n        <img src="${imageURL}">\n\n        `;
+            style.innerHTML = `\n        .gameObject {\n          width: auto;\n          height: 100%;\n          background-image: url("./img/tijera.svg");\n          background-repeat: no-repeat;\n          background-size: contain;\n          background-position: center;\n        }        \n        `;
+            shadow.appendChild(div);
+            shadow.appendChild(style);
+        }
+    });
+}

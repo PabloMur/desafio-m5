@@ -13,8 +13,9 @@ export function initCustomText() {
 
       style.innerHTML = `
         .title{
-            font-size:52px;
+            font-size:80px;
             font-weight: bold;
+            color: #009048;
         }
         .body{
             font-size: 18px;

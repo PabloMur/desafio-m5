@@ -1,0 +1,1 @@
+module.exports = require('./bundle-url').getBundleURL() + "papel.HASH_REF_03741ecdbd5e3fcb2161b09dcc3eb3fd.svg";
