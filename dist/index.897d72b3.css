@@ -18,6 +18,8 @@ body {
 
 .containerManos {
   display: flex;
+  justify-content: center;
+  align-items: baseline;
   height: 100px;
   width: 100%;
 }

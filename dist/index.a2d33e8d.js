@@ -497,7 +497,7 @@ parcelHelpers.export(exports, "initPageInstructions", ()=>initPageInstructions
 );
 function initPageInstructions(params) {
     const div = document.createElement("div");
-    div.innerHTML = `\n            <h1>Presioná jugar\n            y elegí: piedra, papel o tijera antes de que pasen los 3 segundos.</h1>\n            <custom-button class="play-button">¡Jugar!</custom-button>\n          `;
+    div.innerHTML = `\n            <custom-text type="body">Presioná jugar\n            y elegí: piedra, papel o tijera antes de que pasen los 3 segundos.\n            </custom-text>\n            <custom-button class="play-button">¡Jugar!</custom-button>\n          `;
     const playButton = div.querySelector(".play-button");
     playButton.addEventListener("click", ()=>{
         params.goTo("/choose");
@@ -578,7 +578,7 @@ function initCustomText() {
             });
             const div = document.createElement("div");
             const style = document.createElement("style");
-            style.innerHTML = `\n        .title{\n            font-size:80px;\n            font-weight: bold;\n            color: #009048;\n        }\n        .body{\n            font-size: 18px;\n        }\n      \n      `;
+            style.innerHTML = `\n        .title{\n            font-size:80px;\n            font-weight: bold;\n            color: #009048;\n        }\n        .body{\n            font-size: 50px;\n        }\n      `;
             div.className = variant;
             div.textContent = this.textContent;
             shadow.appendChild(div);

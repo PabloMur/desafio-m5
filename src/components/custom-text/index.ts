@@ -18,9 +18,8 @@ export function initCustomText() {
             color: #009048;
         }
         .body{
-            font-size: 18px;
+            font-size: 50px;
         }
-      
       `;
 
       div.className = variant;
