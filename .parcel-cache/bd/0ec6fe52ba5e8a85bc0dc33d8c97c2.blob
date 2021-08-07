@@ -514,7 +514,7 @@ parcelHelpers.export(exports, "initPageChoose", ()=>initPageChoose
 );
 function initPageChoose(params) {
     const div = document.createElement("div");
-    div.innerHTML = `\n              <h1 class="contador">Contador</h1>\n              <div class="containerManos">\n                <game-item variant="tijera" id="tijera"></game-item>\n                <game-item variant="piedra" id="piedra"></game-item>\n                <game-item variant="papel" id="papel"></game-item>\n            </div>\n            `;
+    div.innerHTML = `\n              <h1 class="contador">Contador</h1>\n              <div class="containerManos">\n                <game-item variant="tijera" id="tijera"></game-item>\n                <game-item variant="piedra"></game-item>\n                <game-item variant="papel"></game-item>\n            </div>\n            `;
     const contador = div.querySelector(".contador");
     contador.textContent = "papa";
     contador.addEventListener("click", ()=>{
@@ -522,15 +522,15 @@ function initPageChoose(params) {
     });
     const tijera = div.querySelector("#tijera");
     tijera.addEventListener("click", ()=>{
-        console.log("TIJERA");
+        console.log("batata");
     });
     const piedra = div.querySelector("#piedra");
     piedra.addEventListener("click", ()=>{
-        console.log("PIEDRA");
+        console.log("batata");
     });
     const papel = div.querySelector("#papel");
     papel.addEventListener("click", ()=>{
-        console.log("PAPEL");
+        console.log("batata");
     });
     return div;
 }
@@ -639,7 +639,7 @@ function initGameItem() {
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR","url:./img/tijera.svg":"3j4qi","url:./img/piedra.svg":"eSFOi","url:./img/papel.svg":"1LQHj"}],"3j4qi":[function(require,module,exports) {
-module.exports = require('./bundle-url').getBundleURL() + "tijera.7da0cc86.svg";
+module.exports = require('./bundle-url').getBundleURL() + "tijera.HASH_REF_aeae24e679c64415a6f796977da0cc86.svg";
 
 },{"./bundle-url":"3seVR"}],"3seVR":[function(require,module,exports) {
 "use strict";
@@ -670,10 +670,10 @@ exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
 },{}],"eSFOi":[function(require,module,exports) {
-module.exports = require('./bundle-url').getBundleURL() + "piedra.9375442b.svg";
+module.exports = require('./bundle-url').getBundleURL() + "piedra.HASH_REF_f55c35a3c042024612e8aa369375442b.svg";
 
 },{"./bundle-url":"3seVR"}],"1LQHj":[function(require,module,exports) {
-module.exports = require('./bundle-url').getBundleURL() + "papel.cc3eb3fd.svg";
+module.exports = require('./bundle-url').getBundleURL() + "papel.HASH_REF_03741ecdbd5e3fcb2161b09dcc3eb3fd.svg";
 
 },{"./bundle-url":"3seVR"}],"4BaNJ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -704,4 +704,4 @@ function initScoreComp() {
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}]},["1VVWy","2slnh"], "2slnh", "parcelRequirea5a0")
 
-//# sourceMappingURL=index.a2d33e8d.js.map
+//# sourceMappingURL=index.HASH_REF_d8056cbe3be13bb3608c49fca2d33e8d.js.map

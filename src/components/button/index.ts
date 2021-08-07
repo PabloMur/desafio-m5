@@ -27,6 +27,7 @@ export function initCustomButton() {
               @media screen and (min-width: 500px){
                 .root{
                   min-width: 600px;
+                  max-width: 600px;
                 }
               }
             `;

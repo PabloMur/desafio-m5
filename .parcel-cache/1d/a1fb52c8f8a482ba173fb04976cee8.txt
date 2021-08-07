@@ -1,26 +1,29 @@
-15781
+15786
 65/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/package.json1627702931688860272 0
+93/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/components/custom-container/index.ts1628355568909183727 0
+82/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/components/score/index.ts1628308861400795228 0
 83/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/components/game-option/img1628125200129144463 1
 88/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/components/game-option/index.ts1628125926192473950 0
 79/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/components/game-option1628126021301932991 1
-83/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/components/button/index.ts1628112312863767486 0
+83/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/components/button/index.ts1628311108848436451 0
 74/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/components/button1628123211317057013 1
 88/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/components/custom-text/index.ts1628127024520831614 0
+65/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/state.ts1628302295652317265 0
 70/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/img/fondo.svg1628109870460170729 0
 60/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/img1628122885264108261 1
 67/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/index.html1628126041730245963 0
 84/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/pages/instructions/index.ts1628127131653891170 0
-65/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/index.ts1628113513806500269 0
+65/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/index.ts1628308822487979533 0
 66/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/router.ts1628126730014387407 0
 62/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/yarn.lock1627702931664859475 0
-76/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/index.ef04b2af.css1628127132037895091 0
-77/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/tijera.7da0cc86.svg1628127132005894765 0
-76/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/papel.cc3eb3fd.svg1628127132005894765 0
-77/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/piedra.9375442b.svg1628127132005894765 0
-79/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/index.a2d33e8d.js.map1628127132057895296 0
-80/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/index.897d72b3.css.map1628127132057895296 0
-76/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/fondo.228ccc65.svg1628127132001894724 0
-68/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/index.html1628127132037895091 0
+76/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/index.ef04b2af.css1628355310768908341 0
+77/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/tijera.7da0cc86.svg1628355310708903847 0
+76/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/papel.cc3eb3fd.svg1628355310708903847 0
+77/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/piedra.9375442b.svg1628355310708903847 0
+79/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/index.a2d33e8d.js.map1628355310828912835 0
+80/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/index.897d72b3.css.map1628355310804911037 0
+76/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/fondo.228ccc65.svg1628355310732905645 0
+68/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/index.html1628355310724905045 0
 96/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/xml-name-validator/LICENSE.txt1621016882099000000 0
 102/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/xml-name-validator/lib/grammar.pegjs1621016882099000000 0
 108/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/xml-name-validator/lib/generated-parser.js1621016882099000000 0
@@ -1843,6 +1846,7 @@
 93/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/object.values/.eslintignore1625700593382000000 0
 91/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/object.values/polyfill.js1625700593382000000 0
 89/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/object.values/README.md1625700593382000000 0
+84/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/components/custom-container1628355491200854168 1
 82/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/lodash/meanBy.js1621016715852000000 0
 89/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/es-abstract/2020/BigInt1627702919868499674 1
 88/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/object.values/index.js1625700593382000000 0
@@ -4038,7 +4042,7 @@
 76/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/oauth-sign1627702888715905687 1
 88/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/ajv/lib/dotjs/index.js1621016729348000000 0
 111/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/@parcel/bundler-default/src/DefaultBundler.js1625700570071000000 0
-75/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/index.a2d33e8d.js1628127132037895091 0
+75/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/index.a2d33e8d.js1628355310768908341 0
 94/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/@babel/traverse/lib/types.js1627181407454000000 0
 114/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/caniuse-lite/data/features/link-rel-prerender.js1627702832186000000 0
 110/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/unset-value/node_modules/has-values/index.js1621016892013000000 0
@@ -4173,7 +4177,7 @@
 89/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/uuid/lib/bytesToUuid.js1621016817997000000 0
 106/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/type-fest/source/fixed-length-array.d.ts1625700585370000000 0
 108/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/caniuse-lite/data/features/style-scoped.js1627702832186000000 0
-57/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist1628127132065895378 1
+57/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist1628355310844914034 1
 101/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/unbox-primitive/.github/FUNDING.yml1625700611440000000 0
 89/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/unbox-primitive/.github1627702911372283739 1
 108/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/js-yaml/lib/js-yaml/schema/default_full.js1621016732103000000 0
@@ -5435,7 +5439,7 @@
 90/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/diffie-hellman/readme.md1621016854808000000 0
 101/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/core-js/stable/string/trim-start.js1627702831410000000 0
 110/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/globby/node_modules/fast-glob/out/index.d.ts1626472019119000000 0
-56/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src1628109909908055970 1
+56/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src1628302153837119386 1
 88/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/string-hash/.npmignore1625700591320000000 0
 133/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/@babel/helper-compilation-targets/node_modules/semver/bin/semver.js1621016766823000000 0
 130/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/postcss-modules-extract-imports/node_modules/postcss/lib/root.js1625700588466000000 0
@@ -5617,7 +5621,7 @@
 88/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/json5/lib/stringify.js1621016779780000000 0
 113/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/highlight.js/scss/atelier-sulphurpool-dark.scss1625700597641000000 0
 84/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/css-tree/lib/lexer1627702917904446414 1
-79/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/pages/welcome/index.ts1628126155363984635 0
+79/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/pages/welcome/index.ts1628310056133564693 0
 99/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/es-abstract/2018/UnicodeEscape.js1627702838118000000 0
 88/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/word-wrap/package.json1621016783345000000 0
 97/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/caniuse-lite/data/regions/PL.js1627702832186000000 0
@@ -5712,7 +5716,7 @@
 134/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/postcss-modules/node_modules/postcss-modules-extract-imports/LICENSE1621016728393000000 0
 126/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/postcss-modules/node_modules/postcss-modules-extract-imports1627702892683949591 1
 120/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/@parcel/core/test/fixtures/targets-default-distdir-one1627702922860584534 1
-76/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/index.897d72b3.css1628127132037895091 0
+76/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/index.897d72b3.css1628355310768908341 0
 114/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/@babel/types/lib/builders/generated/uppercase.js1627181409233000000 0
 87/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/node-forge/lib/pbe.js1621016817245000000 0
 98/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/es-abstract/2020/IteratorStep.js1627702838118000000 0
@@ -7638,7 +7642,7 @@
 93/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/css-tree/lib/common/List.js1621016832931000000 0
 115/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/jsdom/lib/jsdom/living/events/CustomEvent-impl.js1625700591867000000 0
 117/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/jsdom/lib/jsdom/living/generated/HTMLDataElement.js1625700591867000000 0
-80/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/pages/welcome/index.css1628126239869145749 0
+80/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/pages/welcome/index.css1628310161207218837 0
 109/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/to-regex/node_modules/is-extendable/LICENSE1621016852980000000 0
 97/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/caniuse-lite/data/regions/SM.js1627702832186000000 0
 119/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/jsdom/lib/jsdom/living/nodes/HTMLImageElement-impl.js1625700591867000000 0
@@ -9499,7 +9503,7 @@
 93/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/chalk/node_modules/has-flag1627702878587840414 1
 86/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/escape-html/index.js1619883916182000000 0
 92/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/hex-color-regex/.npmignore1621016882996000000 0
-78/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/pages/result/index.ts1628112736738585354 0
+78/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/pages/result/index.ts1628308756866563547 0
 85/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/ws/lib/extension.js1626472018796000000 0
 117/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/posthtml/node_modules/posthtml-parser/tsconfig.json1625700578647000000 0
 95/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/hex-color-regex/.editorconfig1621016882996000000 0
@@ -9539,7 +9543,7 @@
 123/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/stylehacks/node_modules/postcss-selector-parser/README.md1621016866853000000 0
 93/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/es-to-primitive/test/es6.js1621016840274000000 0
 84/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/has-ansi/readme.md1625700590823000000 0
-78/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/pages/choose/index.ts1628126382724970794 0
+78/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/pages/choose/index.ts1628311568166921752 0
 142/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/stylehacks/node_modules/postcss-selector-parser/postcss-selector-parser.d.ts1621016866853000000 0
 107/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/core-js/features/string/virtual/strike.js1627702831410000000 0
 105/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/htmlparser2/node_modules/domhandler/lib1627702905904165145 1
@@ -9900,7 +9904,7 @@
 97/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/caniuse-lite/data/regions/AZ.js1627702832186000000 0
 84/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/lowlight/readme.md1625700603594000000 0
 89/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/public-encrypt/index.js1621016854887000000 0
-66/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/index.css1628126919991874433 0
+66/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/index.css1628308472572012974 0
 118/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/jsdom/lib/jsdom/living/generated/HTMLEmbedElement.js1625700591867000000 0
 96/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/decode-uri-component/readme.md1621016868010000000 0
 92/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/public-encrypt/.travis.yml1621016854887000000 0
@@ -10788,7 +10792,7 @@
 78/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/uniq/LICENSE1621016838806000000 0
 95/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/crypto-browserify/.travis.yml1621016809865000000 0
 102/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/caniuse-lite/data/features/tls1-2.js1627702832186000000 0
-67/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/components1627707070732279300 1
+67/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/components1628355482720355247 1
 71/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/saxes1627702892463946906 1
 99/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/core-js/es/typed-array/entries.js1627702831410000000 0
 100/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/core-js/es/instance/replace-all.js1627702831410000000 0
@@ -13408,7 +13412,7 @@
 94/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/color-convert/conversions.js1621016862545000000 0
 103/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/core-js/stable/array/virtual/slice.js1627702831410000000 0
 98/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/core-js/proposals/global-this.js1627702831410000000 0
-80/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/index.ef04b2af.css.map1628127132057895296 0
+80/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/dist/index.ef04b2af.css.map1628355310836913434 0
 96/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/core-js/proposals/string-at.js1627702831410000000 0
 86/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/json-schema/draft-011627702906120169518 1
 98/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/core-js/stable/json/stringify.js1627702831410000000 0
@@ -14194,6 +14198,7 @@
 113/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/core-js/modules/esnext.object.iterate-values.js1627702831410000000 0
 103/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/@parcel/core/test/Environment.test.js1625700567687000000 0
 104/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/json-schema/draft-03/examples/calendar1621016892407000000 0
+73/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/src/components/score1628308598770904004 1
 84/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/nice-try/README.md1621016885965000000 0
 99/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/json-schema/draft-03/examples/geo1621016892407000000 0
 112/home/pablo/Documentos/carpetaAP/m5/final/desafio-m5/node_modules/core-js/features/reflect/prevent-extensions.js1627702831410000000 0
