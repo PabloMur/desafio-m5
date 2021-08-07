@@ -1,0 +1,13 @@
+.welcome {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.titulo {
+  height: 60vh;
+}
+
+/*# sourceMappingURL=index.HASH_REF_f3e0b8f46119dfe57da49367ef04b2af.css.map */

@@ -2,10 +2,15 @@ export function initPageWelcome(params) {
   const div = document.createElement("div");
   div.className = "welcome";
   div.innerHTML = `
-            <custom-text variant="title" class="titulo">
-              Piedra <br/>Papel<br/> Tijera
-            </custom-text> 
-            <custom-button class="start-button">¡Empezar!</custom-button>
+            
+            <div class="containerManos">
+              <custom-text variant="title" class="titulo">
+                Piedra Papel ó Tijera
+              </custom-text>
+            </div> 
+            <div class="containerManos">
+              <custom-button class="start-button">¡Empezar!</custom-button>
+            </div>
             <div class="containerManos">
               <game-item variant="tijera"></game-item>
               <game-item variant="piedra"></game-item>

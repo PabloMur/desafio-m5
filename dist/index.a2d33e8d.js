@@ -385,15 +385,17 @@ var _router = require("./router");
 var _button = require("./components/button");
 var _customText = require("./components/custom-text");
 var _gameOption = require("./components/game-option");
+var _score = require("./components/score");
 (function main() {
     _button.initCustomButton();
     _customText.initCustomText();
     _gameOption.initGameItem();
+    _score.initScoreComp();
     const container = document.querySelector("#root");
     _router.initRouter(container);
 })();
 
-},{"./router":"57npn","./components/button":"62CCj","./components/custom-text":"5UP4W","./components/game-option":"53Yk1"}],"57npn":[function(require,module,exports) {
+},{"./router":"57npn","./components/button":"62CCj","./components/custom-text":"5UP4W","./components/game-option":"53Yk1","./components/score":"4BaNJ"}],"57npn":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initRouter", ()=>initRouter
@@ -450,7 +452,7 @@ parcelHelpers.export(exports, "initPageWelcome", ()=>initPageWelcome
 function initPageWelcome(params) {
     const div = document.createElement("div");
     div.className = "welcome";
-    div.innerHTML = `\n            <custom-text variant="title" class="titulo">\n              Piedra <br/>Papel<br/> Tijera\n            </custom-text> \n            <custom-button class="start-button">¡Empezar!</custom-button>\n            <div class="containerManos">\n              <game-item variant="tijera"></game-item>\n              <game-item variant="piedra"></game-item>\n              <game-item variant="papel"></game-item>\n            </div>\n          `;
+    div.innerHTML = `\n            \n            <div class="containerManos">\n              <custom-text variant="title" class="titulo">\n                Piedra Papel ó Tijera\n              </custom-text>\n            </div> \n            <div class="containerManos">\n              <custom-button class="start-button">¡Empezar!</custom-button>\n            </div>\n            <div class="containerManos">\n              <game-item variant="tijera"></game-item>\n              <game-item variant="piedra"></game-item>\n              <game-item variant="papel"></game-item>\n            </div>\n          `;
     const button = div.querySelector(".start-button");
     button.addEventListener("click", function() {
         params.goTo("/instructions");
@@ -512,7 +514,9 @@ parcelHelpers.export(exports, "initPageChoose", ()=>initPageChoose
 );
 function initPageChoose(params) {
     const div = document.createElement("div");
-    div.innerHTML = `\n              <h1>Contador</h1>\n              <div class="containerManos">\n                <game-item variant="tijera"></game-item>\n                <game-item variant="piedra"></game-item>\n                <game-item variant="papel"></game-item>\n            </div>\n            `;
+    div.innerHTML = `\n              <h1 class="contador">Contador</h1>\n              <div class="containerManos">\n                <game-item variant="tijera"></game-item>\n                <game-item variant="piedra"></game-item>\n                <game-item variant="papel"></game-item>\n            </div>\n            `;
+    const contador = div.querySelector(".contador");
+    contador.textContent = "papa";
     div.addEventListener("click", ()=>{
         params.goTo("/result");
     });
@@ -526,9 +530,9 @@ parcelHelpers.export(exports, "initPageResult", ()=>initPageResult
 );
 function initPageResult(params) {
     const div = document.createElement("div");
-    div.innerHTML = `\n                <h1>Result</h1>\n                <custom-button>¡Volver a Jugar!</custom-button>\n              `;
+    div.innerHTML = `\n                <h1>Result</h1>\n                <score-component></score-component>\n                <custom-button>¡Volver a Jugar!</custom-button>\n              `;
     div.addEventListener("click", ()=>{
-        params.goTo("/welcome");
+        params.goTo("/instructions");
     });
     return div;
 }
@@ -545,15 +549,15 @@ function initCustomButton() {
             this.render();
         }
         render() {
-            const label = this.getAttribute("label");
+            //const label = this.getAttribute("label");
             const shadow = this.attachShadow({
                 mode: "open"
             });
             const button = document.createElement("button");
             const style = document.createElement("style");
             button.className = "root";
-            style.innerHTML = `\n              .root{\n                  font-size: 18px;\n                  border-radius: 4px;\n                  padding: 17px 13px;\n                  background-color:#006CFC;\n                  color:#D8FCFC;\n                  width: 100%;\n                  border: 10px solid #001997;\n              }\n            `;
-            button.textContent = this.textContent || "papa";
+            style.innerHTML = `\n              .root{\n                  font-size: 18px;\n                  border-radius: 4px;\n                  padding: 17px 13px;\n                  background-color:#006CFC;\n                  color:#D8FCFC;\n                  width: 100%;\n                  border: 10px solid #001997;\n              }\n              @media screen and (min-width: 500px){\n                .root{\n                  min-width: 600px;\n                }\n              }\n            `;
+            button.textContent = this.textContent || "ups!";
             shadow.appendChild(button);
             shadow.appendChild(style);
         }
@@ -659,6 +663,33 @@ module.exports = require('./bundle-url').getBundleURL() + "piedra.9375442b.svg";
 },{"./bundle-url":"3seVR"}],"1LQHj":[function(require,module,exports) {
 module.exports = require('./bundle-url').getBundleURL() + "papel.cc3eb3fd.svg";
 
-},{"./bundle-url":"3seVR"}]},["1VVWy","2slnh"], "2slnh", "parcelRequirea5a0")
+},{"./bundle-url":"3seVR"}],"4BaNJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initScoreComp", ()=>initScoreComp
+);
+function initScoreComp() {
+    customElements.define("score-component", class extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            //const label = this.getAttribute("label");
+            const shadow = this.attachShadow({
+                mode: "open"
+            });
+            const score = document.createElement("div");
+            const style = document.createElement("style");
+            score.className = "root";
+            style.innerHTML = `\n                .root{\n                    height: 150px;\n                    width: 300px;\n                    background: red;\n                }\n                @media screen and (min-width: 500px){\n                  .root{\n                    max-width: 600px;\n                  }\n                }\n              `;
+            score.textContent = this.textContent || "ups!";
+            shadow.appendChild(score);
+            shadow.appendChild(style);
+        }
+    });
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}]},["1VVWy","2slnh"], "2slnh", "parcelRequirea5a0")
 
 //# sourceMappingURL=index.a2d33e8d.js.map
