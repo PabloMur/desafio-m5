@@ -386,16 +386,20 @@ var _button = require("./components/button");
 var _customText = require("./components/custom-text");
 var _gameOption = require("./components/game-option");
 var _score = require("./components/score");
+var _customContainer = require("./components/custom-container");
+var _counter = require("./components/counter");
 (function main() {
     _button.initCustomButton();
     _customText.initCustomText();
     _gameOption.initGameItem();
     _score.initScoreComp();
+    _customContainer.initCustomContainer();
+    _counter.initCounter();
     const container = document.querySelector("#root");
     _router.initRouter(container);
 })();
 
-},{"./router":"57npn","./components/button":"62CCj","./components/custom-text":"5UP4W","./components/game-option":"53Yk1","./components/score":"4BaNJ"}],"57npn":[function(require,module,exports) {
+},{"./router":"57npn","./components/button":"62CCj","./components/custom-text":"5UP4W","./components/game-option":"53Yk1","./components/score":"4BaNJ","./components/custom-container":"12BLd","./components/counter":"4uxHe"}],"57npn":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initRouter", ()=>initRouter
@@ -499,7 +503,7 @@ parcelHelpers.export(exports, "initPageInstructions", ()=>initPageInstructions
 );
 function initPageInstructions(params) {
     const div = document.createElement("div");
-    div.innerHTML = `\n            <custom-text type="body">Presioná jugar\n            y elegí: piedra, papel o tijera antes de que pasen los 3 segundos.\n            </custom-text>\n            <custom-button class="play-button">¡Jugar!</custom-button>\n          `;
+    div.innerHTML = `\n              <custom-text type="body">\n              Presioná jugar y elegí: piedra, papel o tijera antes de que pasen los 3 segundos.\n              </custom-text>\n              <custom-button class="play-button">¡Jugar!</custom-button>\n          `;
     const playButton = div.querySelector(".play-button");
     playButton.addEventListener("click", ()=>{
         params.goTo("/choose");
@@ -512,9 +516,10 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initPageChoose", ()=>initPageChoose
 );
+var _state = require("../../state");
 function initPageChoose(params) {
     const div = document.createElement("div");
-    div.innerHTML = `\n              <h1 class="contador">Contador</h1>\n              <div class="containerManos">\n                <game-item variant="tijera" id="tijera"></game-item>\n                <game-item variant="piedra" id="piedra"></game-item>\n                <game-item variant="papel" id="papel"></game-item>\n            </div>\n            `;
+    div.innerHTML = `\n              <h1 class="contador">Contador</h1>\n              <counter></counter>\n              <div class="containerManos">\n                <game-item variant="tijera" id="tijera"></game-item>\n                <game-item variant="piedra" id="piedra"></game-item>\n                <game-item variant="papel" id="papel"></game-item>\n            </div>\n            `;
     const contador = div.querySelector(".contador");
     contador.textContent = "papa";
     contador.addEventListener("click", ()=>{
@@ -523,6 +528,11 @@ function initPageChoose(params) {
     const tijera = div.querySelector("#tijera");
     tijera.addEventListener("click", ()=>{
         console.log("TIJERA");
+        const palabra = "hola";
+        _state.state.subscribe((any)=>{
+            _state.state.setState(palabra);
+            return any;
+        });
     });
     const piedra = div.querySelector("#piedra");
     piedra.addEventListener("click", ()=>{
@@ -534,6 +544,27 @@ function initPageChoose(params) {
     });
     return div;
 }
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../state":"50U9u"}],"50U9u":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "state", ()=>state
+);
+const state = {
+    data: {
+    },
+    listeners: [],
+    getState () {
+        return this.data;
+    },
+    setState (newState) {
+        this.data = newState;
+        for (const cb of this.listeners)cb();
+    },
+    subscribe (callback) {
+        this.listeners.push(callback);
+    }
+};
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}],"2WB0S":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -700,6 +731,59 @@ function initScoreComp() {
             shadow.appendChild(style);
         }
     });
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}],"12BLd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initCustomContainer", ()=>initCustomContainer
+);
+function initCustomContainer() {
+    class CustomContainer extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            const variant = this.getAttribute("variant") || "body";
+            const shadow = this.attachShadow({
+                mode: "open"
+            });
+            const container = document.createElement("div");
+            const style = document.createElement("style");
+            style.innerHTML = `\n          .comun{\n            display: flex;\n            flex-direction: column;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            width: 100%;\n            background: green;\n          }\n        `;
+            container.className = variant;
+            shadow.appendChild(container);
+            shadow.appendChild(style);
+        }
+    }
+    customElements.define("custom-container", CustomContainer);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}],"4uxHe":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initCounter", ()=>initCounter
+);
+function initCounter() {
+    class Counter extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            const shadow = this.attachShadow({
+                mode: "open"
+            });
+            const div = document.createElement("div");
+            const style = document.createElement("style");
+            style.innerHTML = `\n          .title{\n              font-size:80px;\n              font-weight: bold;\n              color: #009048;\n          }\n          .body{\n              font-size: 50px;\n          }\n        `;
+            div.textContent = "hola";
+            shadow.appendChild(div);
+            shadow.appendChild(style);
+        }
+    }
+    customElements.define("counter", Counter);
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}]},["1VVWy","2slnh"], "2slnh", "parcelRequirea5a0")

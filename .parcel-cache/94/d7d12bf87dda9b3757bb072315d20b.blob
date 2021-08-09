@@ -1,0 +1,24 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initCounter", ()=>initCounter
+);
+function initCounter() {
+    class Counter extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            const shadow = this.attachShadow({
+                mode: "open"
+            });
+            const div = document.createElement("div");
+            const style = document.createElement("style");
+            style.innerHTML = `\n          .title{\n              font-size:80px;\n              font-weight: bold;\n              color: #009048;\n          }\n          .body{\n              font-size: 50px;\n          }\n        `;
+            div.textContent = "hola";
+            shadow.appendChild(div);
+            shadow.appendChild(style);
+        }
+    }
+    customElements.define("counter", Counter);
+}

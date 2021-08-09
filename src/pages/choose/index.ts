@@ -5,6 +5,7 @@ export function initPageChoose(params) {
 
   div.innerHTML = `
               <h1 class="contador">Contador</h1>
+              <counter></counter>
               <div class="containerManos">
                 <game-item variant="tijera" id="tijera"></game-item>
                 <game-item variant="piedra" id="piedra"></game-item>
@@ -22,6 +23,11 @@ export function initPageChoose(params) {
   const tijera = div.querySelector("#tijera");
   tijera.addEventListener("click", () => {
     console.log("TIJERA");
+    const palabra = "hola";
+    state.subscribe((any) => {
+      state.setState(palabra);
+      return any;
+    });
   });
   const piedra = div.querySelector("#piedra");
   piedra.addEventListener("click", () => {
