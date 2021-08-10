@@ -1,0 +1,30 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "state", ()=>state
+);
+const state = {
+    data: {
+        currentGame: {
+            miJugada: "",
+            PCjuagada: ""
+        },
+        history: []
+    },
+    listeners: [],
+    getState () {
+        return this.data;
+    },
+    setState (newState) {
+        this.data = newState;
+        for (const cb of this.listeners)cb();
+    },
+    subscribe (callback) {
+        this.listeners.push(callback);
+    },
+    setMove (move) {
+        const currentState = this.getState();
+        currentState.currentGame.miJugada;
+    },
+    whoWins (miJugada, PCjuagada) {
+    }
+};

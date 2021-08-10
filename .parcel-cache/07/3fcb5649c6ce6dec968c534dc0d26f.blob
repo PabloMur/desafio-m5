@@ -1,0 +1,15 @@
+var _router = require("./router");
+var _button = require("./components/button");
+var _customText = require("./components/custom-text");
+var _gameOption = require("./components/game-option");
+var _score = require("./components/score");
+//import { initCounter } from "./components/counter";
+(function main() {
+    _button.initCustomButton();
+    _customText.initCustomText();
+    _gameOption.initGameItem();
+    _score.initScoreComp();
+    //initCounter();
+    const container = document.querySelector("#root");
+    _router.initRouter(container);
+})();

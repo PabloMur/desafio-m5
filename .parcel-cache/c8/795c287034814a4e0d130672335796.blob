@@ -1,0 +1,28 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initScoreComp", ()=>initScoreComp
+);
+var _state = require("../../state");
+function initScoreComp() {
+    customElements.define("score-component", class extends HTMLElement {
+        constructor(){
+            super();
+            this.shadow = this.attachShadow({
+                mode: "open"
+            });
+            this.nombre = "hola";
+            _state.state.subscribe(()=>{
+                this.syncWithState();
+            });
+            this.syncWithState();
+        }
+        syncWithState() {
+            const lastState = _state.state.getState();
+            this.nombre = lastState.data.nombre;
+            this.render();
+        }
+        render() {
+            this.shadow.innerHTML = `\n          <div>\n            <p>${this.nombre}</p>\n          </div>\n        `;
+        }
+    });
+}

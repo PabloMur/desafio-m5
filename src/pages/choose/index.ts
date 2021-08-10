@@ -4,38 +4,25 @@ export function initPageChoose(params) {
   const div = document.createElement("div");
 
   div.innerHTML = `
-              <h1 class="contador">Contador</h1>
-              <counter></counter>
+              <h1 class="contador"></h1>
+              <choose-counter variant="choose"></choose-counter>
               <div class="containerManos">
                 <game-item variant="tijera" id="tijera"></game-item>
                 <game-item variant="piedra" id="piedra"></game-item>
                 <game-item variant="papel" id="papel"></game-item>
-            </div>
+              </div>
             `;
 
   const contador = div.querySelector(".contador");
-  contador.textContent = "papa";
-
-  contador.addEventListener("click", () => {
-    params.goTo("/result");
-  });
+  contador.textContent = state.getState().nombre;
 
   const tijera = div.querySelector("#tijera");
   tijera.addEventListener("click", () => {
-    console.log("TIJERA");
-    const palabra = "hola";
-    state.subscribe((any) => {
-      state.setState(palabra);
-      return any;
-    });
+    console.log("hola");
   });
-  const piedra = div.querySelector("#piedra");
-  piedra.addEventListener("click", () => {
-    console.log("PIEDRA");
-  });
-  const papel = div.querySelector("#papel");
-  papel.addEventListener("click", () => {
-    console.log("PAPEL");
+
+  contador.addEventListener("click", () => {
+    params.goTo("/result");
   });
 
   return div;

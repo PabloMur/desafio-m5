@@ -2,13 +2,12 @@ export function initCustomButton() {
   customElements.define(
     "custom-button",
     class extends HTMLElement {
+      shadow = this.attachShadow({ mode: "open" });
       constructor() {
         super();
         this.render();
       }
       render() {
-        //const label = this.getAttribute("label");
-        const shadow = this.attachShadow({ mode: "open" });
         const button = document.createElement("button");
         const style = document.createElement("style");
 
@@ -28,14 +27,15 @@ export function initCustomButton() {
                 .root{
                   min-width: 600px;
                   max-width: 600px;
+                  margin: 0 auto;
                 }
               }
             `;
 
         button.textContent = this.textContent || "ups!";
 
-        shadow.appendChild(button);
-        shadow.appendChild(style);
+        this.shadow.appendChild(button);
+        this.shadow.appendChild(style);
       }
     }
   );

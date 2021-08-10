@@ -386,20 +386,25 @@ var _button = require("./components/button");
 var _customText = require("./components/custom-text");
 var _gameOption = require("./components/game-option");
 var _score = require("./components/score");
-var _customContainer = require("./components/custom-container");
 var _counter = require("./components/counter");
+var _state = require("./state");
 (function main() {
     _button.initCustomButton();
     _customText.initCustomText();
     _gameOption.initGameItem();
     _score.initScoreComp();
-    _customContainer.initCustomContainer();
     _counter.initCounter();
+    _state.state.setState({
+        nombre: "poli",
+        puntajeMaquina: 0,
+        puntajeTu: 0
+    });
+    console.log(_state.state);
     const container = document.querySelector("#root");
     _router.initRouter(container);
 })();
 
-},{"./router":"57npn","./components/button":"62CCj","./components/custom-text":"5UP4W","./components/game-option":"53Yk1","./components/score":"4BaNJ","./components/custom-container":"12BLd","./components/counter":"4uxHe"}],"57npn":[function(require,module,exports) {
+},{"./router":"57npn","./components/button":"62CCj","./components/custom-text":"5UP4W","./components/game-option":"53Yk1","./components/score":"4BaNJ","./components/counter":"4uxHe","./state":"50U9u"}],"57npn":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initRouter", ()=>initRouter
@@ -519,28 +524,15 @@ parcelHelpers.export(exports, "initPageChoose", ()=>initPageChoose
 var _state = require("../../state");
 function initPageChoose(params) {
     const div = document.createElement("div");
-    div.innerHTML = `\n              <h1 class="contador">Contador</h1>\n              <counter></counter>\n              <div class="containerManos">\n                <game-item variant="tijera" id="tijera"></game-item>\n                <game-item variant="piedra" id="piedra"></game-item>\n                <game-item variant="papel" id="papel"></game-item>\n            </div>\n            `;
+    div.innerHTML = `\n              <h1 class="contador"></h1>\n              <choose-counter variant="choose"></choose-counter>\n              <div class="containerManos">\n                <game-item variant="tijera" id="tijera"></game-item>\n                <game-item variant="piedra" id="piedra"></game-item>\n                <game-item variant="papel" id="papel"></game-item>\n              </div>\n            `;
     const contador = div.querySelector(".contador");
-    contador.textContent = "papa";
-    contador.addEventListener("click", ()=>{
-        params.goTo("/result");
-    });
+    contador.textContent = _state.state.getState().nombre;
     const tijera = div.querySelector("#tijera");
     tijera.addEventListener("click", ()=>{
-        console.log("TIJERA");
-        const palabra = "hola";
-        _state.state.subscribe((any)=>{
-            _state.state.setState(palabra);
-            return any;
-        });
+        console.log("hola");
     });
-    const piedra = div.querySelector("#piedra");
-    piedra.addEventListener("click", ()=>{
-        console.log("PIEDRA");
-    });
-    const papel = div.querySelector("#papel");
-    papel.addEventListener("click", ()=>{
-        console.log("PAPEL");
+    contador.addEventListener("click", ()=>{
+        params.goTo("/result");
     });
     return div;
 }
@@ -552,6 +544,11 @@ parcelHelpers.export(exports, "state", ()=>state
 );
 const state = {
     data: {
+        currentGame: {
+            miJugada: "",
+            PCjuagada: ""
+        },
+        history: []
     },
     listeners: [],
     getState () {
@@ -563,6 +560,28 @@ const state = {
     },
     subscribe (callback) {
         this.listeners.push(callback);
+    },
+    setMove (move) {
+        const currentState = this.getState();
+        currentState.currentGame.miJugada;
+    },
+    whoWins (miJugada, PCjuagada) {
+        const ganeConTijeras = miJugada == "tijera" && PCjuagada == "papel";
+        const ganeConPiedra = miJugada == "piedra" && PCjuagada == "tijera";
+        const ganeConPapel = miJugada == "papel" && PCjuagada == "piedra";
+        const perdiConTijeras = miJugada == "tijera" && PCjuagada == "piedra";
+        const perdiConPapel = miJugada == "papel" && PCjuagada == "tijera";
+        const perdiConPiedra = miJugada == "piedra" && PCjuagada == "papel";
+        const gane = [
+            ganeConPapel,
+            ganeConPiedra,
+            ganeConTijeras
+        ].includes(true);
+        const perdi = [
+            perdiConPapel,
+            perdiConPiedra,
+            perdiConTijeras
+        ].includes(true);
     }
 };
 
@@ -573,8 +592,9 @@ parcelHelpers.export(exports, "initPageResult", ()=>initPageResult
 );
 function initPageResult(params) {
     const div = document.createElement("div");
-    div.innerHTML = `\n                <h1>Result</h1>\n                <score-component></score-component>\n                <custom-button>¡Volver a Jugar!</custom-button>\n              `;
-    div.addEventListener("click", ()=>{
+    div.innerHTML = `\n                <h1>Result</h1>\n                <score-component></score-component>\n                <custom-button class="return">¡Volver a Jugar!</custom-button>\n              `;
+    const retunrButton = div.querySelector(".return");
+    retunrButton.addEventListener("click", ()=>{
         params.goTo("/instructions");
     });
     return div;
@@ -589,20 +609,19 @@ function initCustomButton() {
     customElements.define("custom-button", class extends HTMLElement {
         constructor(){
             super();
+            this.shadow = this.attachShadow({
+                mode: "open"
+            });
             this.render();
         }
         render() {
-            //const label = this.getAttribute("label");
-            const shadow = this.attachShadow({
-                mode: "open"
-            });
             const button = document.createElement("button");
             const style = document.createElement("style");
             button.className = "root";
-            style.innerHTML = `\n              .root{\n                  font-size: 18px;\n                  border-radius: 4px;\n                  padding: 17px 13px;\n                  background-color:#006CFC;\n                  color:#D8FCFC;\n                  width: 100%;\n                  border: 10px solid #001997;\n              }\n              @media screen and (min-width: 500px){\n                .root{\n                  min-width: 600px;\n                  max-width: 600px;\n                }\n              }\n            `;
+            style.innerHTML = `\n              .root{\n                  font-size: 18px;\n                  border-radius: 4px;\n                  padding: 17px 13px;\n                  background-color:#006CFC;\n                  color:#D8FCFC;\n                  width: 100%;\n                  border: 10px solid #001997;\n              }\n              @media screen and (min-width: 500px){\n                .root{\n                  min-width: 600px;\n                  max-width: 600px;\n                  margin: 0 auto;\n                }\n              }\n            `;
             button.textContent = this.textContent || "ups!";
-            shadow.appendChild(button);
-            shadow.appendChild(style);
+            this.shadow.appendChild(button);
+            this.shadow.appendChild(style);
         }
     });
 }
@@ -617,19 +636,19 @@ function initCustomText() {
         constructor(){
             super();
             this.render();
+            this.attachShadow({
+                mode: "open"
+            });
         }
         render() {
             const variant = this.getAttribute("variant") || "body";
-            const shadow = this.attachShadow({
-                mode: "open"
-            });
             const div = document.createElement("div");
             const style = document.createElement("style");
             style.innerHTML = `\n        .title{\n            font-size:80px;\n            font-weight: bold;\n            color: #009048;\n        }\n        .body{\n            font-size: 50px;\n        }\n      `;
             div.className = variant;
             div.textContent = this.textContent;
-            shadow.appendChild(div);
-            shadow.appendChild(style);
+            this.shadow.appendChild(div);
+            this.shadow.appendChild(style);
         }
     }
     customElements.define("custom-text", CustomText);
@@ -644,27 +663,27 @@ function initGameItem() {
     customElements.define("game-item", class extends HTMLElement {
         constructor(){
             super();
+            this.render = ()=>{
+                const imageTijera = require("url:./img/tijera.svg");
+                const imagePiedra = require("url:./img/piedra.svg");
+                const imagePapel = require("url:./img/papel.svg");
+                let imageURL;
+                const variant = this.getAttribute("variant");
+                const shadow = this.attachShadow({
+                    mode: "open"
+                });
+                const div = document.createElement("div");
+                const style = document.createElement("style");
+                if (variant == "tijera") imageURL = imageTijera;
+                if (variant == "piedra") imageURL = imagePiedra;
+                if (variant == "papel") imageURL = imagePapel;
+                div.className = "gameObject";
+                div.innerHTML = `\n        <img src="${imageURL}">\n        `;
+                style.innerHTML = `\n        .gameObject {\n          width: auto;\n          height: 100%;\n        }        \n        `;
+                shadow.appendChild(div);
+                shadow.appendChild(style);
+            };
             this.render();
-        }
-        render() {
-            const imageTijera = require("url:./img/tijera.svg");
-            const imagePiedra = require("url:./img/piedra.svg");
-            const imagePapel = require("url:./img/papel.svg");
-            let imageURL = "hola";
-            const variant = this.getAttribute("variant");
-            const shadow = this.attachShadow({
-                mode: "open"
-            });
-            const div = document.createElement("div");
-            const style = document.createElement("style");
-            if (variant == "tijera") imageURL = imageTijera;
-            if (variant == "piedra") imageURL = imagePiedra;
-            if (variant == "papel") imageURL = imagePapel;
-            div.className = "gameObject";
-            div.innerHTML = `\n        <img src="${imageURL}">\n        `;
-            style.innerHTML = `\n        .gameObject {\n          width: auto;\n          height: 100%;\n        }        \n        `;
-            shadow.appendChild(div);
-            shadow.appendChild(style);
         }
     });
 }
@@ -711,81 +730,68 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initScoreComp", ()=>initScoreComp
 );
+var _state = require("../../state");
 function initScoreComp() {
     customElements.define("score-component", class extends HTMLElement {
         constructor(){
             super();
-            this.render();
-        }
-        render() {
-            //const label = this.getAttribute("label");
-            const shadow = this.attachShadow({
+            this.shadow = this.attachShadow({
                 mode: "open"
             });
-            const score = document.createElement("div");
-            const style = document.createElement("style");
-            score.className = "root";
-            style.innerHTML = `\n                .root{\n                    height: 150px;\n                    width: 300px;\n                    background: red;\n                }\n                @media screen and (min-width: 500px){\n                  .root{\n                    max-width: 600px;\n                  }\n                }\n              `;
-            score.textContent = this.textContent || "ups!";
-            shadow.appendChild(score);
-            shadow.appendChild(style);
+            this.nombre = "hola";
+            this.syncWithState = ()=>{
+                const lastState = _state.state.getState();
+                this.nombre = lastState.nombre;
+                this.puntajeMaquina = lastState.puntajeMaquina;
+                this.puntajeTu = lastState.puntajeTu;
+                this.render();
+            };
+            this.render = ()=>{
+                this.shadow.innerHTML = `\n          <div class="scoreCont">\n            <p>${this.nombre}</p>\n            <p>tu: ${this.puntajeMaquina}</p>\n            <p>maquina: ${this.puntajeTu}</p>\n          </div>\n        `;
+                const style = document.createElement("style");
+                style.innerHTML = `\n            .scoreCont{\n              height: 150px;\n              width: 100%;\n              background: purple;\n              color: white;\n              display:flex;\n              flex-direction: column;\n              justify-content: center;\n              align-items: center;\n            }\n        `;
+                this.shadow.appendChild(style);
+            };
+            _state.state.subscribe(()=>{
+                this.syncWithState();
+            });
+            this.syncWithState();
         }
     });
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}],"12BLd":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "initCustomContainer", ()=>initCustomContainer
-);
-function initCustomContainer() {
-    class CustomContainer extends HTMLElement {
-        constructor(){
-            super();
-            this.render();
-        }
-        render() {
-            const variant = this.getAttribute("variant") || "body";
-            const shadow = this.attachShadow({
-                mode: "open"
-            });
-            const container = document.createElement("div");
-            const style = document.createElement("style");
-            style.innerHTML = `\n          .comun{\n            display: flex;\n            flex-direction: column;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            width: 100%;\n            background: green;\n          }\n        `;
-            container.className = variant;
-            shadow.appendChild(container);
-            shadow.appendChild(style);
-        }
-    }
-    customElements.define("custom-container", CustomContainer);
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}],"4uxHe":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../state":"50U9u"}],"4uxHe":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initCounter", ()=>initCounter
 );
+var _state = require("../../state");
 function initCounter() {
     class Counter extends HTMLElement {
         constructor(){
             super();
+            this.counter = 0;
             this.render();
         }
         render() {
+            const variant = this.getAttribute("variant");
             const shadow = this.attachShadow({
                 mode: "open"
             });
             const div = document.createElement("div");
             const style = document.createElement("style");
-            style.innerHTML = `\n          .title{\n              font-size:80px;\n              font-weight: bold;\n              color: #009048;\n          }\n          .body{\n              font-size: 50px;\n          }\n        `;
-            div.textContent = "hola";
+            const lastState = _state.state.getState();
+            style.innerHTML = `\n      .choose{\n              height:300px;\n              width: 100%;\n              display: flex;\n              align-items: center;\n              justify-content: center;\n              font-size: 30px;\n            }\n            `;
+            div.textContent = `${lastState.nombre}`;
+            div.className = variant;
             shadow.appendChild(div);
             shadow.appendChild(style);
+        //Counter();
         }
     }
-    customElements.define("counter", Counter);
+    customElements.define("choose-counter", Counter);
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}]},["1VVWy","2slnh"], "2slnh", "parcelRequirea5a0")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../state":"50U9u"}]},["1VVWy","2slnh"], "2slnh", "parcelRequirea5a0")
 
 //# sourceMappingURL=index.a2d33e8d.js.map

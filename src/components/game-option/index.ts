@@ -1,3 +1,5 @@
+import { state } from "../../state";
+
 export function initGameItem() {
   customElements.define(
     "game-item",
@@ -6,12 +8,13 @@ export function initGameItem() {
         super();
         this.render();
       }
-      render() {
+      render = () => {
         const imageTijera = require("url:./img/tijera.svg");
         const imagePiedra = require("url:./img/piedra.svg");
         const imagePapel = require("url:./img/papel.svg");
 
-        let imageURL = "hola";
+        let imageURL;
+
         const variant = this.getAttribute("variant");
         const shadow = this.attachShadow({ mode: "open" });
         const div = document.createElement("div");
@@ -43,7 +46,7 @@ export function initGameItem() {
 
         shadow.appendChild(div);
         shadow.appendChild(style);
-      }
+      };
     }
   );
 }

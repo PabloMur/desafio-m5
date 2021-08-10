@@ -1,0 +1,35 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initCounter", ()=>initCounter
+);
+function initCounter() {
+    class Counter extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            const variant = this.getAttribute("variant");
+            const shadow = this.attachShadow({
+                mode: "open"
+            });
+            const div = document.createElement("div");
+            const style = document.createElement("style");
+            const Counter1 = ()=>{
+                let counter = 0;
+                let intervalID = setInterval(()=>{
+                    console.log(counter);
+                    counter++;
+                    if (counter > 3) clearInterval(intervalID);
+                }, 3000);
+            };
+            Counter1();
+            style.innerHTML = `\n          .choose{\n              height:300px;\n              width: 100%;\n              background: orange;\n              display: flex;\n              align-items: center;\n              justify-content: center;\n          }\n        `;
+            div.textContent = "hola";
+            div.className = variant;
+            shadow.appendChild(div);
+            shadow.appendChild(style);
+        }
+    }
+    customElements.define("choose-counter", Counter);
+}

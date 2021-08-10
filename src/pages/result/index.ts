@@ -3,10 +3,11 @@ export function initPageResult(params) {
   div.innerHTML = `
                 <h1>Result</h1>
                 <score-component></score-component>
-                <custom-button>¡Volver a Jugar!</custom-button>
+                <custom-button class="return">¡Volver a Jugar!</custom-button>
               `;
 
-  div.addEventListener("click", () => {
+  const retunrButton = div.querySelector(".return");
+  retunrButton.addEventListener("click", () => {
     params.goTo("/instructions");
   });
   return div;

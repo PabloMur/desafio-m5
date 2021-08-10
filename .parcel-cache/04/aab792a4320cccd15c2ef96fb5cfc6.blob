@@ -1,0 +1,28 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initScoreComp", ()=>initScoreComp
+);
+var _state = require("../../state");
+function initScoreComp() {
+    customElements.define("score-component", class extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+            _state.state.subscribe(()=>{
+            });
+        }
+        render() {
+            //const label = this.getAttribute("label");
+            const shadow = this.attachShadow({
+                mode: "open"
+            });
+            const score = document.createElement("div");
+            const style = document.createElement("style");
+            score.className = "root";
+            style.innerHTML = `\n                .root{\n                    height: 150px;\n                    width: 300px;\n                    background: red;\n                }\n                @media screen and (min-width: 500px){\n                  .root{\n                    max-width: 600px;\n                  }\n                }\n              `;
+            score.textContent = this.textContent || "ups!";
+            shadow.appendChild(score);
+            shadow.appendChild(style);
+        }
+    });
+}

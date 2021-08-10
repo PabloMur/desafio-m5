@@ -1,0 +1,17 @@
+var _router = require("./router");
+var _button = require("./components/button");
+var _customText = require("./components/custom-text");
+var _gameOption = require("./components/game-option");
+var _score = require("./components/score");
+var _counter = require("./components/counter");
+var _state = require("./state");
+(function main() {
+    _button.initCustomButton();
+    _customText.initCustomText();
+    _gameOption.initGameItem();
+    _score.initScoreComp();
+    _counter.initCounter();
+    console.log(_state.state);
+    const container = document.querySelector("#root");
+    _router.initRouter(container);
+})();

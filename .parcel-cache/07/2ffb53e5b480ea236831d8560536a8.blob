@@ -1,0 +1,32 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initPageChoose", ()=>initPageChoose
+);
+var _state = require("../../state");
+function initPageChoose(params) {
+    const div = document.createElement("div");
+    div.innerHTML = `\n              <h1 class="contador">Contador</h1>\n              <choose-counter variant="choose"></choose-counter>\n              <div class="containerManos">\n                <game-item variant="tijera" id="tijera"></game-item>\n                <game-item variant="piedra" id="piedra"></game-item>\n                <game-item variant="papel" id="papel"></game-item>\n            </div>\n            `;
+    const contador = div.querySelector(".contador");
+    contador.textContent = "papa";
+    contador.addEventListener("click", ()=>{
+        params.goTo("/result");
+    });
+    const tijera = div.querySelector("#tijera");
+    tijera.addEventListener("click", ()=>{
+        console.log("TIJERA");
+        const palabra = "hola";
+        _state.state.subscribe((any)=>{
+            _state.state.setState(palabra);
+            return any;
+        });
+    });
+    const piedra = div.querySelector("#piedra");
+    piedra.addEventListener("click", ()=>{
+        console.log("PIEDRA");
+    });
+    const papel = div.querySelector("#papel");
+    papel.addEventListener("click", ()=>{
+        console.log("PAPEL");
+    });
+    return div;
+}

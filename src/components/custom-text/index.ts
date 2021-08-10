@@ -1,13 +1,13 @@
 export function initCustomText() {
   class CustomText extends HTMLElement {
+    shadow: ShadowRoot;
     constructor() {
       super();
       this.render();
+      this.attachShadow({ mode: "open" });
     }
     render() {
       const variant = this.getAttribute("variant") || "body";
-
-      const shadow = this.attachShadow({ mode: "open" });
       const div = document.createElement("div");
       const style = document.createElement("style");
 
@@ -21,11 +21,11 @@ export function initCustomText() {
             font-size: 50px;
         }
       `;
-
       div.className = variant;
       div.textContent = this.textContent;
-      shadow.appendChild(div);
-      shadow.appendChild(style);
+
+      this.shadow.appendChild(div);
+      this.shadow.appendChild(style);
     }
   }
   customElements.define("custom-text", CustomText);
