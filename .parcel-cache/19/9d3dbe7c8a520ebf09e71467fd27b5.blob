@@ -1,0 +1,50 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "state", ()=>state
+);
+const state = {
+    data: {
+        currentGame: {
+            miJugada: "",
+            PCjuagada: ""
+        },
+        history: []
+    },
+    listeners: [],
+    getState () {
+        return this.data;
+    },
+    setState (newState) {
+        this.data = newState;
+        for (const cb of this.listeners)cb();
+    },
+    subscribe (callback) {
+        this.listeners.push(callback);
+    },
+    setMove (move) {
+        const currentState = this.getState();
+        currentState.currentGame.miJugada;
+    },
+    whoWins (miJugada, PCjuagada) {
+        const ganeConTijeras = miJugada == "tijera" && PCjuagada == "papel";
+        const ganeConPiedra = miJugada == "piedra" && PCjuagada == "tijera";
+        const ganeConPapel = miJugada == "papel" && PCjuagada == "piedra";
+        const perdiConTijeras = miJugada == "tijera" && PCjuagada == "piedra";
+        const perdiConPapel = miJugada == "papel" && PCjuagada == "tijera";
+        const perdiConPiedra = miJugada == "piedra" && PCjuagada == "papel";
+        const gane = [
+            ganeConPapel,
+            ganeConPiedra,
+            ganeConTijeras
+        ].includes(true);
+        const perdi = [
+            perdiConPapel,
+            perdiConPiedra,
+            perdiConTijeras
+        ].includes(true);
+        return {
+            gane,
+            perdi
+        };
+    }
+};

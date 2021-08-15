@@ -1,11 +1,11 @@
 export function initCustomText() {
   class CustomText extends HTMLElement {
-    shadow: ShadowRoot;
+    shadow = this.attachShadow({ mode: "open" });
     constructor() {
       super();
       this.render();
-      this.attachShadow({ mode: "open" });
     }
+
     render() {
       const variant = this.getAttribute("variant") || "body";
       const div = document.createElement("div");
@@ -19,6 +19,8 @@ export function initCustomText() {
         }
         .body{
             font-size: 50px;
+            max-width: 600px;
+            margin-bottom: 20px;
         }
       `;
       div.className = variant;

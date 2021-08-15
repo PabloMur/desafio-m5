@@ -13,8 +13,7 @@ import { state } from "./state";
   initScoreComp();
   initCounter();
 
-  state.setState({ nombre: "poli", puntajeMaquina: 0, puntajeTu: 0 });
-  console.log(state);
+  state.init();
 
   const container = document.querySelector("#root");
   initRouter(container);

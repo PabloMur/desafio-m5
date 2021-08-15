@@ -1,0 +1,57 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "state", ()=>state
+);
+const state = {
+    data: {
+    },
+    listeners: [],
+    getState () {
+        return this.data;
+    },
+    setState (newState) {
+        this.data = newState;
+        for (const cb of this.listeners)cb();
+    },
+    subscribe (callback) {
+        this.listeners.push(callback);
+    },
+    whoWins (miJugada, PCjuagada) {
+        const ganeConTijeras = miJugada == "tijera" && PCjuagada == "papel";
+        const ganeConPiedra = miJugada == "piedra" && PCjuagada == "tijera";
+        const ganeConPapel = miJugada == "papel" && PCjuagada == "piedra";
+        const perdiConTijeras = miJugada == "tijera" && PCjuagada == "piedra";
+        const perdiConPapel = miJugada == "papel" && PCjuagada == "tijera";
+        const perdiConPiedra = miJugada == "piedra" && PCjuagada == "papel";
+        const gane = [
+            ganeConPapel,
+            ganeConPiedra,
+            ganeConTijeras
+        ].includes(true);
+        const perdi = [
+            perdiConPapel,
+            perdiConPiedra,
+            perdiConTijeras
+        ].includes(true);
+        const empate = gane == perdi;
+        if (gane) return "gane";
+        if (perdi) return "perdi";
+        if (empate) return "empate";
+    },
+    pushToHistory (a) {
+        return this.data.history.push(a);
+    },
+    init () {
+        state.setState({
+            currentGame: {
+                miJugada: "",
+                PCjugada: ""
+            },
+            history: [],
+            score: {
+                maquina: 0,
+                tu: 0
+            }
+        });
+    }
+};

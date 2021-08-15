@@ -1,10 +1,7 @@
 type play = "piedra" | "papel" | "tijera";
 
 const state = {
-  data: {
-    currentGame: { miJugada: "", PCjuagada: "" },
-    history: [],
-  },
+  data: {},
   listeners: [],
 
   getState() {
@@ -20,12 +17,7 @@ const state = {
     this.listeners.push(callback);
   },
 
-  setMove(move: play) {
-    const currentState = this.getState();
-    currentState.currentGame.miJugada;
-  },
-
-  whoWins(miJugada: play, PCjuagada: play) {
+  whoWins(miJugada: play, PCjuagada: any) {
     const ganeConTijeras = miJugada == "tijera" && PCjuagada == "papel";
     const ganeConPiedra = miJugada == "piedra" && PCjuagada == "tijera";
     const ganeConPapel = miJugada == "papel" && PCjuagada == "piedra";
@@ -38,6 +30,35 @@ const state = {
     const perdi = [perdiConPapel, perdiConPiedra, perdiConTijeras].includes(
       true
     );
+    const empate = gane == perdi;
+
+    if (gane) {
+      const lastState = state.getState();
+      state.setState({
+        ...lastState,
+        score: { tu: 1, maquina: 0 },
+      });
+      return "gane";
+    }
+    if (perdi) {
+      return "perdi";
+    }
+    if (empate) {
+      return "empate";
+    }
+  },
+  pushToHistory(a) {
+    return this.data.history.push(a);
+  },
+  init() {
+    state.setState({
+      currentGame: { miJugada: "", PCjugada: "" },
+      history: [],
+      score: {
+        maquina: 0,
+        tu: 0,
+      },
+    });
   },
 };
 

@@ -1,13 +1,16 @@
-import { state } from "../../state";
-
 export function initGameItem() {
   customElements.define(
     "game-item",
     class extends HTMLElement {
       constructor() {
         super();
-        this.render();
+        this.syncWithState();
       }
+
+      syncWithState = () => {
+        this.render();
+      };
+
       render = () => {
         const imageTijera = require("url:./img/tijera.svg");
         const imagePiedra = require("url:./img/piedra.svg");
@@ -40,7 +43,7 @@ export function initGameItem() {
         style.innerHTML = `
         .gameObject {
           width: auto;
-          height: 100%;
+          height: 30vh;
         }        
         `;
 
