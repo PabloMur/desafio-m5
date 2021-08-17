@@ -4,7 +4,6 @@ export function initPageResult(params) {
   const div = document.createElement("div");
   div.innerHTML = `
                 <h1>Result</h1>
-                <p>${true}</p>
                 <score-component></score-component>
                 <custom-button class="return">¡Volver a Jugar!</custom-button>
               `;

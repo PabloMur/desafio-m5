@@ -19,7 +19,6 @@ export function initPageChoose(params) {
     .container{
       height: 100vh;
       width: 100%;
-      background: red;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -55,11 +54,7 @@ export function initPageChoose(params) {
       ...lastState,
       currentGame: { miJugada: "tijera", PCjugada: retornaOpcionPC(rand) },
     });
-    console.log(rand + "que");
     let resultadoDeLaPartida = state.whoWins("tijera", retornaOpcionPC(rand));
-    console.log(resultadoDeLaPartida + "***");
-
-    console.log(state);
   });
 
   const piedra = div.querySelector("#piedra");
@@ -69,7 +64,7 @@ export function initPageChoose(params) {
       ...lastState,
       currentGame: { miJugada: "piedra", PCjugada: retornaOpcionPC(rand) },
     });
-    console.log(state);
+    let resultadoDeLaPartida = state.whoWins("piedra", retornaOpcionPC(rand));
   });
 
   const papel = div.querySelector("#papel");
@@ -79,7 +74,7 @@ export function initPageChoose(params) {
       ...lastState,
       currentGame: { miJugada: "papel", PCjugada: retornaOpcionPC(rand) },
     });
-    console.log(state);
+    let resultadoDeLaPartida = state.whoWins("piedra", retornaOpcionPC(rand));
   });
 
   const contador = div.querySelector(".contador");

@@ -1,7 +1,14 @@
 type play = "piedra" | "papel" | "tijera";
 
 const state = {
-  data: {},
+  data: {
+    currentGame: { miJugada: "", PCjugada: "" },
+    history: [],
+    score: {
+      maquina: 0,
+      tu: 0,
+    },
+  },
   listeners: [],
 
   getState() {
@@ -12,6 +19,7 @@ const state = {
     for (const cb of this.listeners) {
       cb();
     }
+    localStorage.setItem("saved-games", JSON.stringify(newState));
   },
   subscribe(callback: (any) => any) {
     this.listeners.push(callback);
@@ -33,17 +41,29 @@ const state = {
     const empate = gane == perdi;
 
     if (gane) {
-      const lastState = state.getState();
-      state.setState({
+      const lastState = this.getState();
+      this.setState({
         ...lastState,
-        score: { tu: 1, maquina: 0 },
+        score: { tu: lastState.score.tu + 1, maquina: lastState.score.maquina },
+        result: "gane",
       });
       return "gane";
     }
     if (perdi) {
+      const lastState = this.getState();
+      this.setState({
+        ...lastState,
+        score: { tu: lastState.score.tu, maquina: lastState.score.maquina + 1 },
+        result: "perdi",
+      });
       return "perdi";
     }
     if (empate) {
+      const lastState = this.getState();
+      this.setState({
+        ...lastState,
+        result: "empate",
+      });
       return "empate";
     }
   },
@@ -51,14 +71,8 @@ const state = {
     return this.data.history.push(a);
   },
   init() {
-    state.setState({
-      currentGame: { miJugada: "", PCjugada: "" },
-      history: [],
-      score: {
-        maquina: 0,
-        tu: 0,
-      },
-    });
+    let localData = localStorage.getItem("saved-games");
+    this.setState(JSON.parse(localData));
   },
 };
 

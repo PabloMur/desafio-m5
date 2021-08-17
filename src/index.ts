@@ -14,7 +14,5 @@ import { state } from "./state";
   initCounter();
 
   state.init();
-
-  const container = document.querySelector("#root");
-  initRouter(container);
+  initRouter(document.querySelector("#root"));
 })();

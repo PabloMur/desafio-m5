@@ -1,0 +1,47 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initRouter", ()=>initRouter
+);
+var _welcome = require("./pages/welcome");
+var _instructions = require("./pages/instructions");
+var _choose = require("./pages/choose");
+var _result = require("./pages/result");
+const routes = [
+    {
+        path: /\/welcome/,
+        handler: _welcome.initPageWelcome
+    },
+    {
+        path: /\/instructions/,
+        handler: _instructions.initPageInstructions
+    },
+    {
+        path: /\/choose/,
+        handler: _choose.initPageChoose
+    },
+    {
+        path: /\/result/,
+        handler: _result.initPageResult
+    }, 
+];
+function initRouter(container) {
+    function goTo(path) {
+        history.pushState({
+        }, "", path);
+        handleRoute(path);
+    }
+    function handleRoute(route) {
+        for (const r of routes)if (r.path.test(route)) {
+            const el = r.handler({
+                goTo: goTo
+            });
+            if (container.firstChild) container.firstChild.remove();
+            container.appendChild(el);
+        }
+    }
+    if (location.pathname == "/" || location.pathname == "/desafio-m5") goTo("/welcome");
+    else handleRoute(location.pathname);
+    window.addEventListener("popstate", ()=>{
+        handleRoute(location.pathname);
+    });
+}

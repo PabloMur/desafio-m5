@@ -1,0 +1,98 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initPageChoose", ()=>initPageChoose
+);
+var _state = require("../../state");
+function initPageChoose(params) {
+    const lastState = _state.state.getState();
+    const div = document.createElement("div");
+    let cuentaReg = 3;
+    let jugada = false;
+    div.innerHTML = `\n              <h1 class="contador"></h1>\n              <div class="containerManos">\n                <game-item variant="tijera" id="tijera"></game-item>\n                <game-item variant="piedra" id="piedra"></game-item>\n                <game-item variant="papel" id="papel"></game-item>\n              </div>\n            `;
+    div.className = "container";
+    const style = document.createElement("style");
+    style.innerHTML = `\n    .container{\n      height: 100vh;\n      width: 100%;\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      align-items: center;\n    }\n  `;
+    div.appendChild(style);
+    function getRandomArbitrary(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+    let rand = getRandomArbitrary(1, 4);
+    const pcOptions = [
+        {
+            k: 1,
+            op: "piedra"
+        },
+        {
+            k: 2,
+            op: "papel"
+        },
+        {
+            k: 3,
+            op: "tijera"
+        }, 
+    ];
+    const retornaOpcionPC = (r)=>{
+        for (const key of pcOptions){
+            if (r == key.k) return key.op;
+        }
+    };
+    const tijera = div.querySelector("#tijera");
+    tijera.addEventListener("click", ()=>{
+        jugada = true;
+        _state.state.setState({
+            ...lastState,
+            currentGame: {
+                miJugada: "tijera",
+                PCjugada: retornaOpcionPC(rand)
+            }
+        });
+        console.log(rand + "que");
+        let resultadoDeLaPartida = _state.state.whoWins("tijera", retornaOpcionPC(rand));
+        console.log(resultadoDeLaPartida + "***");
+        console.log(_state.state);
+    });
+    const piedra = div.querySelector("#piedra");
+    piedra.addEventListener("click", ()=>{
+        jugada = true;
+        _state.state.setState({
+            ...lastState,
+            currentGame: {
+                miJugada: "piedra",
+                PCjugada: retornaOpcionPC(rand)
+            }
+        });
+        let resultadoDeLaPartida = _state.state.whoWins("piedra", retornaOpcionPC(rand));
+        console.log(resultadoDeLaPartida + "***");
+        console.log(_state.state);
+    });
+    const papel = div.querySelector("#papel");
+    papel.addEventListener("click", ()=>{
+        jugada = true;
+        _state.state.setState({
+            ...lastState,
+            currentGame: {
+                miJugada: "papel",
+                PCjugada: retornaOpcionPC(rand)
+            },
+            result: _state.state.whoWins("papel", retornaOpcionPC(rand))
+        });
+    });
+    const contador = div.querySelector(".contador");
+    contador.textContent = "hola";
+    contador.addEventListener("click", ()=>{
+        params.goTo("/result");
+    });
+    (()=>{
+        let setIN = setInterval(()=>{
+            console.log(cuentaReg);
+            if (cuentaReg == 0 && jugada == false) {
+                clearInterval(setIN);
+                params.goTo("/instructions");
+            } else if (jugada == true) {
+                clearInterval(setIN);
+                params.goTo("/result");
+            } else cuentaReg--;
+        }, 1000);
+    })();
+    return div;
+}

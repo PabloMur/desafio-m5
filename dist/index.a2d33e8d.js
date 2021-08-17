@@ -395,8 +395,7 @@ var _state = require("./state");
     _score.initScoreComp();
     _counter.initCounter();
     _state.state.init();
-    const container = document.querySelector("#root");
-    _router.initRouter(container);
+    _router.initRouter(document.querySelector("#root"));
 })();
 
 },{"./router":"57npn","./components/button":"62CCj","./components/custom-text":"5UP4W","./components/game-option":"53Yk1","./components/score":"4BaNJ","./components/counter":"4uxHe","./state":"50U9u"}],"57npn":[function(require,module,exports) {
@@ -455,8 +454,11 @@ parcelHelpers.export(exports, "initPageWelcome", ()=>initPageWelcome
 );
 function initPageWelcome(params) {
     const div = document.createElement("div");
+    const style = document.createElement("style");
     div.className = "welcome";
     div.innerHTML = `\n            <custom-text variant="title">\n                Piedra <br/>Papel ó<br/> Tijera\n            </custom-text>\n            <div class="containerManos">\n              <custom-button class="start-button">¡Empezar!</custom-button>\n            </div>\n            <div class="containerManos">\n              <game-item variant="tijera"></game-item>\n              <game-item variant="piedra"></game-item>\n              <game-item variant="papel"></game-item>\n            </div>\n          `;
+    style.innerHTML = `\n    .welcome{\n      height: 100vh;\n      width: 100%;\n      display: flex; \n      flex-direction:column;\n      align-items: center;\n      justify-content: space-around;\n    }\n  `;
+    div.appendChild(style);
     const button = div.querySelector(".start-button");
     button.addEventListener("click", function() {
         params.goTo("/instructions");
@@ -525,7 +527,7 @@ function initPageChoose(params) {
     div.innerHTML = `\n              <h1 class="contador"></h1>\n              <div class="containerManos">\n                <game-item variant="tijera" id="tijera"></game-item>\n                <game-item variant="piedra" id="piedra"></game-item>\n                <game-item variant="papel" id="papel"></game-item>\n              </div>\n            `;
     div.className = "container";
     const style = document.createElement("style");
-    style.innerHTML = `\n    .container{\n      height: 100vh;\n      width: 100%;\n      background: red;\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      align-items: center;\n    }\n  `;
+    style.innerHTML = `\n    .container{\n      height: 100vh;\n      width: 100%;\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      align-items: center;\n    }\n  `;
     div.appendChild(style);
     function getRandomArbitrary(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
@@ -560,10 +562,7 @@ function initPageChoose(params) {
                 PCjugada: retornaOpcionPC(rand)
             }
         });
-        console.log(rand + "que");
         let resultadoDeLaPartida = _state.state.whoWins("tijera", retornaOpcionPC(rand));
-        console.log(resultadoDeLaPartida + "***");
-        console.log(_state.state);
     });
     const piedra = div.querySelector("#piedra");
     piedra.addEventListener("click", ()=>{
@@ -575,7 +574,7 @@ function initPageChoose(params) {
                 PCjugada: retornaOpcionPC(rand)
             }
         });
-        console.log(_state.state);
+        let resultadoDeLaPartida = _state.state.whoWins("piedra", retornaOpcionPC(rand));
     });
     const papel = div.querySelector("#papel");
     papel.addEventListener("click", ()=>{
@@ -587,7 +586,7 @@ function initPageChoose(params) {
                 PCjugada: retornaOpcionPC(rand)
             }
         });
-        console.log(_state.state);
+        let resultadoDeLaPartida = _state.state.whoWins("piedra", retornaOpcionPC(rand));
     });
     const contador = div.querySelector(".contador");
     contador.textContent = "hola";
@@ -609,13 +608,22 @@ function initPageChoose(params) {
     return div;
 }
 
-},{"../../state":"50U9u","@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}],"50U9u":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../state":"50U9u"}],"50U9u":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state
 );
 const state = {
     data: {
+        currentGame: {
+            miJugada: "",
+            PCjugada: ""
+        },
+        history: [],
+        score: {
+            maquina: 0,
+            tu: 0
+        }
     },
     listeners: [],
     getState () {
@@ -624,6 +632,7 @@ const state = {
     setState (newState) {
         this.data = newState;
         for (const cb of this.listeners)cb();
+        localStorage.setItem("saved-games", JSON.stringify(newState));
     },
     subscribe (callback) {
         this.listeners.push(callback);
@@ -647,34 +656,44 @@ const state = {
         ].includes(true);
         const empate = gane == perdi;
         if (gane) {
-            const lastState = state.getState();
-            state.setState({
+            const lastState = this.getState();
+            this.setState({
                 ...lastState,
                 score: {
-                    tu: 1,
-                    maquina: 0
-                }
+                    tu: lastState.score.tu + 1,
+                    maquina: lastState.score.maquina
+                },
+                result: "gane"
             });
             return "gane";
         }
-        if (perdi) return "perdi";
-        if (empate) return "empate";
+        if (perdi) {
+            const lastState = this.getState();
+            this.setState({
+                ...lastState,
+                score: {
+                    tu: lastState.score.tu,
+                    maquina: lastState.score.maquina + 1
+                },
+                result: "perdi"
+            });
+            return "perdi";
+        }
+        if (empate) {
+            const lastState = this.getState();
+            this.setState({
+                ...lastState,
+                result: "empate"
+            });
+            return "empate";
+        }
     },
     pushToHistory (a) {
         return this.data.history.push(a);
     },
     init () {
-        state.setState({
-            currentGame: {
-                miJugada: "",
-                PCjugada: ""
-            },
-            history: [],
-            score: {
-                maquina: 0,
-                tu: 0
-            }
-        });
+        let localData = localStorage.getItem("saved-games");
+        this.setState(JSON.parse(localData));
     }
 };
 
@@ -686,7 +705,7 @@ parcelHelpers.export(exports, "initPageResult", ()=>initPageResult
 var _state = require("../../state");
 function initPageResult(params) {
     const div = document.createElement("div");
-    div.innerHTML = `\n                <h1>Result</h1>\n                <p>${true}</p>\n                <score-component></score-component>\n                <custom-button class="return">¡Volver a Jugar!</custom-button>\n              `;
+    div.innerHTML = `\n                <h1>Result</h1>\n                <score-component></score-component>\n                <custom-button class="return">¡Volver a Jugar!</custom-button>\n              `;
     const style = document.createElement("style");
     style.innerHTML = `\n    .container{\n      height: 100vh;\n      width: 100%;\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      align-items: center;\n    }\n  `;
     div.className = "container";
@@ -844,13 +863,13 @@ function initScoreComp() {
                 const lastState = _state.state.getState();
                 this.puntajeMaquina = lastState.score.maquina;
                 this.puntajeTu = lastState.score.tu;
-                this.resultadoPartida = lastState.gameResult;
+                this.resultadoPartida = lastState.result;
                 this.render();
             };
             this.render = ()=>{
-                this.shadow.innerHTML = `\n          <div class="scoreCont">\n            <custom-text variant="star">${this.resultadoPartida}</custom-text>\n            <custom-text>Tú: ${this.puntajeTu}</custom-text>\n            <custom-text>Máquina: ${this.puntajeMaquina}</custom-text>\n          </div>\n        `;
+                this.shadow.innerHTML = `\n          <div class="scoreCont">\n            <custom-text>${this.resultadoPartida}</custom-text>\n            <custom-text>Tú: ${this.puntajeTu}</custom-text>\n            <custom-text>Máquina: ${this.puntajeMaquina}</custom-text>\n          </div>\n        `;
                 const style = document.createElement("style");
-                style.innerHTML = `\n            .scoreCont{\n              height: 50vh;\n              width: 600px;\n              display:flex;\n              flex-direction: column;\n              justify-content: center;\n              align-items: center;\n              border-radius: 5px;\n            }\n        `;
+                style.innerHTML = `\n            .scoreCont{\n              height: 50vh;\n              width: 100%;\n              display:flex;\n              flex-direction: column;\n              justify-content: center;\n              align-items: center;\n              border-radius: 5px;\n              background-color: white;\n              border: 3px solid black;\n            }\n        `;
                 this.shadow.appendChild(style);
             };
             _state.state.subscribe(()=>{
@@ -861,7 +880,7 @@ function initScoreComp() {
     });
 }
 
-},{"../../state":"50U9u","@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}],"4uxHe":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../state":"50U9u"}],"4uxHe":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initCounter", ()=>initCounter

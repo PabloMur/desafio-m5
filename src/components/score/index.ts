@@ -21,13 +21,13 @@ export function initScoreComp() {
         const lastState = state.getState();
         this.puntajeMaquina = lastState.score.maquina;
         this.puntajeTu = lastState.score.tu;
-        this.resultadoPartida = lastState.gameResult;
+        this.resultadoPartida = lastState.result;
         this.render();
       };
       render = () => {
         this.shadow.innerHTML = `
           <div class="scoreCont">
-            <custom-text variant="star">${this.resultadoPartida}</custom-text>
+            <custom-text>${this.resultadoPartida}</custom-text>
             <custom-text>Tú: ${this.puntajeTu}</custom-text>
             <custom-text>Máquina: ${this.puntajeMaquina}</custom-text>
           </div>
@@ -37,12 +37,14 @@ export function initScoreComp() {
         style.innerHTML = `
             .scoreCont{
               height: 50vh;
-              width: 600px;
+              width: 100%;
               display:flex;
               flex-direction: column;
               justify-content: center;
               align-items: center;
               border-radius: 5px;
+              background-color: white;
+              border: 3px solid black;
             }
         `;
 

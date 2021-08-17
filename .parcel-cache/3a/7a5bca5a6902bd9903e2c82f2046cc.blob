@@ -1,0 +1,17 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initPageWelcome", ()=>initPageWelcome
+);
+function initPageWelcome(params) {
+    const div = document.createElement("div");
+    const style = document.createElement("style");
+    div.className = "welcome";
+    div.innerHTML = `\n            <custom-text variant="title">\n                Piedra <br/>Papel ó<br/> Tijera\n            </custom-text>\n            <div class="containerManos">\n              <custom-button class="start-button">¡Empezar!</custom-button>\n            </div>\n            <div class="containerManos">\n              <game-item variant="tijera"></game-item>\n              <game-item variant="piedra"></game-item>\n              <game-item variant="papel"></game-item>\n            </div>\n          `;
+    style.innerHTML = `\n    .welcome{\n      background: orange;\n      height: 100vh;\n      width: 100%;\n      display: flex; \n      flex-direction:column;\n      align-items: center;\n      justify-content: space-arround;\n    }\n  `;
+    div.appendChild(style);
+    const button = div.querySelector(".start-button");
+    button.addEventListener("click", function() {
+        params.goTo("/instructions");
+    });
+    return div;
+}
