@@ -28,7 +28,7 @@ body {
   height: 40vh;
   width: 100%;
   transform: translateY(0%);
-  animation: showUp 0.7   s linear;
+  animation: showUp 0.7s linear;
 }
 
 @keyframes showUp {
