@@ -3,7 +3,7 @@ import { initCustomButton } from "./components/button";
 import { initCustomText } from "./components/custom-text";
 import { initGameItem } from "./components/game-option";
 import { initScoreComp } from "./components/score";
-import { initCounter } from "./components/counter";
+import { initStarComp } from "./components/star-comp";
 import { state } from "./state";
 
 (function main() {
@@ -11,8 +11,19 @@ import { state } from "./state";
   initCustomText();
   initGameItem();
   initScoreComp();
-  initCounter();
+  initStarComp();
 
-  state.init();
+  if (localStorage.getItem("saved-games")) {
+    state.init();
+  } else {
+    state.setState({
+      currentGame: { miJugada: "", PCjugada: "" },
+      history: [],
+      score: {
+        maquina: 0,
+        tu: 0,
+      },
+    });
+  }
   initRouter(document.querySelector("#root"));
 })();

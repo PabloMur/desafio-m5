@@ -16,9 +16,10 @@ export function initCustomText() {
             font-size:80px;
             font-weight: bold;
             color: #009048;
+            transition: all 3s ease;
         }
         .body{
-            font-size: 50px;
+            font-size: 30px;
             max-width: 600px;
             margin-bottom: 20px;
         }

@@ -27,7 +27,7 @@ export function initScoreComp() {
       render = () => {
         this.shadow.innerHTML = `
           <div class="scoreCont">
-            <custom-text>${this.resultadoPartida}</custom-text>
+            <custom-text>Score</custom-text>
             <custom-text>Tú: ${this.puntajeTu}</custom-text>
             <custom-text>Máquina: ${this.puntajeMaquina}</custom-text>
           </div>
@@ -36,15 +36,23 @@ export function initScoreComp() {
         const style = document.createElement("style");
         style.innerHTML = `
             .scoreCont{
-              height: 50vh;
-              width: 100%;
+              height: 30vh;
+              width: 98%;
               display:flex;
               flex-direction: column;
               justify-content: center;
               align-items: center;
               border-radius: 5px;
               background-color: white;
-              border: 3px solid black;
+              border: 5px solid black;
+              margin-bottom: 30px;
+            }
+
+            @media screen and (min-width: 960px){
+              .scoreCont{
+                margin: 30px auto;
+                max-width: 585px;
+              }
             }
         `;
 

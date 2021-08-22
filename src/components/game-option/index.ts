@@ -37,13 +37,22 @@ export function initGameItem() {
 
         div.className = "gameObject";
         div.innerHTML = `
-        <img src="${imageURL}">
+        <img class="image" src="${imageURL}">
         `;
 
         style.innerHTML = `
         .gameObject {
           width: auto;
+          min-height: 200px;
+          margin: 0 10px;
+          transition: all .2s ease-in;
+        }
+        .gameObject:hover{
+          transform: scale(1.3);
+        }
+        .image{
           height: 30vh;
+          width: auto;
         }        
         `;
 

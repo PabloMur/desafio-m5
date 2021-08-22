@@ -2,6 +2,7 @@ import { initPageWelcome } from "./pages/welcome";
 import { initPageInstructions } from "./pages/instructions";
 import { initPageChoose } from "./pages/choose";
 import { initPageResult } from "./pages/result";
+import { initPageComparition } from "./pages/comparition";
 
 const routes = [
   {
@@ -15,6 +16,10 @@ const routes = [
   {
     path: /\/choose/,
     handler: initPageChoose,
+  },
+  {
+    path: /\/comparition/,
+    handler: initPageComparition,
   },
   {
     path: /\/result/,

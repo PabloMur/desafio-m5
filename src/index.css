@@ -6,6 +6,7 @@
 body {
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 #root {
@@ -18,13 +19,25 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  overflow: hidden;
 }
 
 .containerManos {
   display: flex;
   justify-content: center;
-  align-items: baseline;
-  height: 100px;
+  align-items: flex-end;
+  height: 40vh;
   width: 100%;
+  transform: translateY(0%);
+  animation: showUp 0.7   s linear;
+}
+
+@keyframes showUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
 }

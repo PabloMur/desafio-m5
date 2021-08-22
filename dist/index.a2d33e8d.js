@@ -386,19 +386,30 @@ var _button = require("./components/button");
 var _customText = require("./components/custom-text");
 var _gameOption = require("./components/game-option");
 var _score = require("./components/score");
-var _counter = require("./components/counter");
+var _starComp = require("./components/star-comp");
 var _state = require("./state");
 (function main() {
     _button.initCustomButton();
     _customText.initCustomText();
     _gameOption.initGameItem();
     _score.initScoreComp();
-    _counter.initCounter();
-    _state.state.init();
+    _starComp.initStarComp();
+    if (localStorage.getItem("saved-games")) _state.state.init();
+    else _state.state.setState({
+        currentGame: {
+            miJugada: "",
+            PCjugada: ""
+        },
+        history: [],
+        score: {
+            maquina: 0,
+            tu: 0
+        }
+    });
     _router.initRouter(document.querySelector("#root"));
 })();
 
-},{"./router":"57npn","./components/button":"62CCj","./components/custom-text":"5UP4W","./components/game-option":"53Yk1","./components/score":"4BaNJ","./components/counter":"4uxHe","./state":"50U9u"}],"57npn":[function(require,module,exports) {
+},{"./router":"57npn","./components/button":"62CCj","./components/custom-text":"5UP4W","./components/game-option":"53Yk1","./components/score":"4BaNJ","./state":"50U9u","./components/star-comp":"3Stbr"}],"57npn":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initRouter", ()=>initRouter
@@ -407,6 +418,7 @@ var _welcome = require("./pages/welcome");
 var _instructions = require("./pages/instructions");
 var _choose = require("./pages/choose");
 var _result = require("./pages/result");
+var _comparition = require("./pages/comparition");
 const routes = [
     {
         path: /\/welcome/,
@@ -419,6 +431,10 @@ const routes = [
     {
         path: /\/choose/,
         handler: _choose.initPageChoose
+    },
+    {
+        path: /\/comparition/,
+        handler: _comparition.initPageComparition
     },
     {
         path: /\/result/,
@@ -447,7 +463,7 @@ function initRouter(container) {
     });
 }
 
-},{"./pages/welcome":"1yAyO","./pages/instructions":"7Li4L","./pages/choose":"2j31B","./pages/result":"2WB0S","@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}],"1yAyO":[function(require,module,exports) {
+},{"./pages/welcome":"1yAyO","./pages/instructions":"7Li4L","./pages/choose":"2j31B","./pages/result":"2WB0S","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","./pages/comparition":"4fhYI"}],"1yAyO":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initPageWelcome", ()=>initPageWelcome
@@ -456,8 +472,8 @@ function initPageWelcome(params) {
     const div = document.createElement("div");
     const style = document.createElement("style");
     div.className = "welcome";
-    div.innerHTML = `\n            <custom-text variant="title">\n                Piedra <br/>Papel ó<br/> Tijera\n            </custom-text>\n            <div class="containerManos">\n              <custom-button class="start-button">¡Empezar!</custom-button>\n            </div>\n            <div class="containerManos">\n              <game-item variant="tijera"></game-item>\n              <game-item variant="piedra"></game-item>\n              <game-item variant="papel"></game-item>\n            </div>\n          `;
-    style.innerHTML = `\n    .welcome{\n      height: 100vh;\n      width: 100%;\n      display: flex; \n      flex-direction:column;\n      align-items: center;\n      justify-content: space-around;\n    }\n  `;
+    div.innerHTML = `\n            <custom-text variant="title" class="title">\n                Piedra <br/>Papel ó<br/> Tijera\n            </custom-text>\n            <div class="containerManos">\n              <game-item variant="piedra"></game-item>\n              <game-item variant="tijera"></game-item>\n              <game-item variant="papel"></game-item>\n            </div>\n            <custom-button class="start-button">¡Empezar!</custom-button>\n          `;
+    style.innerHTML = `\n    .welcome{\n      height: 100vh;\n      width: 100%;\n      display: flex; \n      flex-direction:column;\n      align-items: center;\n      justify-content: space-around;\n    }\n    \n    .title{\n      animation: fade .6s ease;\n    }\n\n    @keyframes fade{\n      0%{\n        transform: translateY(-100%);\n      }\n      75%{\n        transform: translateY(10%);\n      }\n      100%{\n        transform: translateY(0%);\n      }\n    }\n  `;
     div.appendChild(style);
     const button = div.querySelector(".start-button");
     button.addEventListener("click", function() {
@@ -505,7 +521,11 @@ parcelHelpers.export(exports, "initPageInstructions", ()=>initPageInstructions
 );
 function initPageInstructions(params) {
     const div = document.createElement("div");
-    div.innerHTML = `\n              <custom-text type="body">\n              Presioná jugar y elegí: piedra, papel o tijera antes de que pasen los 3 segundos.\n              </custom-text>\n              <custom-button class="play-button">¡Jugar!</custom-button>\n          `;
+    div.innerHTML = `\n              <p class="instructions">\n              Presioná jugar y elegí: piedra, papel o tijera antes de que pasen los 3 segundos.\n              </p>\n              <custom-button class="play-button">¡Jugar!</custom-button>\n          `;
+    const style = document.createElement("style");
+    div.className = "contenedor";
+    style.innerHTML = `\n  .contenedor{\n    height: 60vh;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-around;\n    \n  }\n  .instructions{\n    font-size: 45px;\n    display: block;\n    height: auto;\n    max-width: 600px;\n    text-align: center;\n    animation: fade .7s ease;\n  }\n  @keyframes fade{\n    0%{\n      opacity: 0;\n    }\n    100%{\n      opacity: 1;\n    }\n  }\n`;
+    div.appendChild(style);
     const playButton = div.querySelector(".play-button");
     playButton.addEventListener("click", ()=>{
         params.goTo("/choose");
@@ -524,10 +544,10 @@ function initPageChoose(params) {
     const div = document.createElement("div");
     let cuentaReg = 3;
     let jugada = false;
-    div.innerHTML = `\n              <h1 class="contador"></h1>\n              <div class="containerManos">\n                <game-item variant="tijera" id="tijera"></game-item>\n                <game-item variant="piedra" id="piedra"></game-item>\n                <game-item variant="papel" id="papel"></game-item>\n              </div>\n            `;
+    div.innerHTML = `\n              <h1 class="contador"></h1>\n              <div class="containerManos">\n                <game-item variant="tijera" id="tijera"></game-item>\n                <game-item variant="piedra" id="piedra"></game-item>\n                <game-item variant="papel" id="papel"></game-item>\n              </div>         \n            `;
     div.className = "container";
     const style = document.createElement("style");
-    style.innerHTML = `\n    .container{\n      height: 100vh;\n      width: 100%;\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      align-items: center;\n    }\n  `;
+    style.innerHTML = `\n    .container{\n      height: 100vh;\n      width: 100%;\n      display: flex;\n      flex-direction: column;\n      justify-content: space-between;\n      align-items: center;\n    }\n  `;
     div.appendChild(style);
     function getRandomArbitrary(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
@@ -586,29 +606,32 @@ function initPageChoose(params) {
                 PCjugada: retornaOpcionPC(rand)
             }
         });
-        let resultadoDeLaPartida = _state.state.whoWins("piedra", retornaOpcionPC(rand));
+        let resultadoDeLaPartida = _state.state.whoWins("papel", retornaOpcionPC(rand));
     });
     const contador = div.querySelector(".contador");
-    contador.textContent = "hola";
-    contador.addEventListener("click", ()=>{
-        params.goTo("/result");
-    });
+    const miniStyle = document.createElement("style");
+    miniStyle.innerHTML = `\n    .contador{\n      height: 300px;\n      width: 300px;\n    }\n  `;
+    contador.appendChild(miniStyle);
+    const styleContador = document.createElement("style");
     (()=>{
         let setIN = setInterval(()=>{
-            console.log(cuentaReg);
             if (cuentaReg == 0 && jugada == false) {
                 clearInterval(setIN);
                 params.goTo("/instructions");
             } else if (jugada == true) {
                 clearInterval(setIN);
-                params.goTo("/result");
-            } else cuentaReg--;
+                params.goTo("/comparition");
+            }
+            contador.innerHTML = cuentaReg.toString();
+            styleContador.innerHTML = `\n        .contador{\n          height: 300px;\n          width: 300px;\n          border-radius: 50%;\n          display: flex;\n          align-items: center;\n          justify-content: center;\n          color: black;\n          font-size: 100px;\n          animation: fade .5s linear;\n        }\n        @keyframes fade{\n          0%{\n            transform: translateY(-100%)\n          }\n          100%{\n            transform: translateY(0%)\n          }\n        }\n        `;
+            contador.appendChild(styleContador);
+            cuentaReg--;
         }, 1000);
     })();
     return div;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../state":"50U9u"}],"50U9u":[function(require,module,exports) {
+},{"../../state":"50U9u","@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}],"50U9u":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state
@@ -705,9 +728,9 @@ parcelHelpers.export(exports, "initPageResult", ()=>initPageResult
 var _state = require("../../state");
 function initPageResult(params) {
     const div = document.createElement("div");
-    div.innerHTML = `\n                <h1>Result</h1>\n                <score-component></score-component>\n                <custom-button class="return">¡Volver a Jugar!</custom-button>\n              `;
+    div.innerHTML = `\n                <star-comp></star-comp>\n                <score-component></score-component>\n                <custom-button class="return">¡Volver a Jugar!</custom-button>\n              `;
     const style = document.createElement("style");
-    style.innerHTML = `\n    .container{\n      height: 100vh;\n      width: 100%;\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      align-items: center;\n    }\n  `;
+    style.innerHTML = `\n    .container{\n      height: 100vh;\n      width: 100%;\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      text-align: center;\n    }\n    .imgEl{\n      height: 200px;\n      width: auto;\n    }\n  `;
     div.className = "container";
     div.appendChild(style);
     const retunrButton = div.querySelector(".return");
@@ -718,7 +741,35 @@ function initPageResult(params) {
     return div;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../state":"50U9u"}],"62CCj":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../state":"50U9u"}],"4fhYI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initPageComparition", ()=>initPageComparition
+);
+var _state = require("../../state");
+function initPageComparition(params) {
+    const result = _state.state.getState();
+    console.log(result);
+    const div = document.createElement("div");
+    div.innerHTML = `\n                <game-item class="pcMove" variant="${result.currentGame.PCjugada}"></game-item>\n                <game-item class="playerMove" variant="${result.currentGame.miJugada}"></game-item>\n                \n            `;
+    const style = document.createElement("style");
+    div.className = "contenedor";
+    style.innerHTML = `\n    .contenedor{\n      height: 100vh;\n      display: flex;\n      flex-direction: column;\n      justify-content: space-between;\n      \n    }\n    \n    .playerMove{\n        margin: 0 auto;\n        animation: fade .5s linear;\n        transform: scale(1.3);\n        \n    }\n    .pcMove{\n        margin: 0 auto;\n        transform: rotate(180deg)\n                   scale(1.3);        \n        animation: fadeInverted .5s linear;\n    }\n\n    @keyframes fade{\n      0%{\n        transform: translateY(100%)\n                   scale(1.3);\n      }\n      100%{\n        transform: translateY(0%)\n                   scale(1.3);\n      }\n    }\n    @keyframes fadeInverted{\n        0%{\n            transform: translateY(-500%)\n                       rotate(180deg)\n                       scale(1.3);\n        }\n        100%{\n            transform: translateY(0%)\n                       rotate(180deg)\n                       scale(1.3);\n        }\n      }\n  `;
+    div.appendChild(style);
+    const countDown = ()=>{
+        let reg = 1;
+        const timmer = setInterval(()=>{
+            if (reg == 0) {
+                clearInterval(timmer);
+                params.goTo("/result");
+            } else reg--;
+        }, 1000);
+    };
+    countDown();
+    return div;
+}
+
+},{"../../state":"50U9u","@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}],"62CCj":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initCustomButton", ()=>initCustomButton
@@ -736,7 +787,7 @@ function initCustomButton() {
             const button = document.createElement("button");
             const style = document.createElement("style");
             button.className = "root";
-            style.innerHTML = `\n              .root{\n                  font-size: 18px;\n                  border-radius: 4px;\n                  padding: 17px 13px;\n                  background-color:#006CFC;\n                  color:#D8FCFC;\n                  width: 100%;\n                  border: 10px solid #001997;\n              }\n              @media screen and (min-width: 500px){\n                .root{\n                  min-width: 600px;\n                  max-width: 600px;\n                  margin: 0 auto;\n                }\n              }\n            `;
+            style.innerHTML = `\n              .root{\n                  font-size: 18px;\n                  border-radius: 4px;\n                  padding: 17px 13px;\n                  background-color:#006CFC;\n                  color:#D8FCFC;\n                  width: 90vw;\n                  border: 10px solid #001997;\n                  animation: lower .4s ease ;\n              }\n              @media screen and (min-width: 960px){\n                .root{\n                  max-width: 600px;\n                  margin: 0 auto;\n                }\n              }\n              @keyframes lower{\n                0%{\n                    transform: translateY(100%);\n                }\n                75%{\n                    transform: translateY(-10%);\n                }\n                100%{\n                    transform: translateY(0%);\n                }\n            }\n            `;
             button.textContent = this.textContent || "ups!";
             this.shadow.appendChild(button);
             this.shadow.appendChild(style);
@@ -762,7 +813,7 @@ function initCustomText() {
             const variant = this.getAttribute("variant") || "body";
             const div = document.createElement("div");
             const style = document.createElement("style");
-            style.innerHTML = `\n        .title{\n            font-size:80px;\n            font-weight: bold;\n            color: #009048;\n        }\n        .body{\n            font-size: 50px;\n            max-width: 600px;\n            margin-bottom: 20px;\n        }\n      `;
+            style.innerHTML = `\n        .title{\n            font-size:80px;\n            font-weight: bold;\n            color: #009048;\n            transition: all 3s ease;\n        }\n        .body{\n            font-size: 30px;\n            max-width: 600px;\n            margin-bottom: 20px;\n        }\n      `;
             div.className = variant;
             div.textContent = this.textContent;
             this.shadow.appendChild(div);
@@ -799,8 +850,8 @@ function initGameItem() {
                 if (variant == "piedra") imageURL = imagePiedra;
                 if (variant == "papel") imageURL = imagePapel;
                 div.className = "gameObject";
-                div.innerHTML = `\n        <img src="${imageURL}">\n        `;
-                style.innerHTML = `\n        .gameObject {\n          width: auto;\n          height: 30vh;\n        }        \n        `;
+                div.innerHTML = `\n        <img class="image" src="${imageURL}">\n        `;
+                style.innerHTML = `\n        .gameObject {\n          width: auto;\n          min-height: 200px;\n          margin: 0 10px;\n          transition: all .2s ease-in;\n        }\n        .gameObject:hover{\n          transform: scale(1.3);\n        }\n        .image{\n          height: 30vh;\n          width: auto;\n        }        \n        `;
                 shadow.appendChild(div);
                 shadow.appendChild(style);
             };
@@ -867,9 +918,9 @@ function initScoreComp() {
                 this.render();
             };
             this.render = ()=>{
-                this.shadow.innerHTML = `\n          <div class="scoreCont">\n            <custom-text>${this.resultadoPartida}</custom-text>\n            <custom-text>Tú: ${this.puntajeTu}</custom-text>\n            <custom-text>Máquina: ${this.puntajeMaquina}</custom-text>\n          </div>\n        `;
+                this.shadow.innerHTML = `\n          <div class="scoreCont">\n            <custom-text>Score</custom-text>\n            <custom-text>Tú: ${this.puntajeTu}</custom-text>\n            <custom-text>Máquina: ${this.puntajeMaquina}</custom-text>\n          </div>\n        `;
                 const style = document.createElement("style");
-                style.innerHTML = `\n            .scoreCont{\n              height: 50vh;\n              width: 100%;\n              display:flex;\n              flex-direction: column;\n              justify-content: center;\n              align-items: center;\n              border-radius: 5px;\n              background-color: white;\n              border: 3px solid black;\n            }\n        `;
+                style.innerHTML = `\n            .scoreCont{\n              height: 30vh;\n              width: 98%;\n              display:flex;\n              flex-direction: column;\n              justify-content: center;\n              align-items: center;\n              border-radius: 5px;\n              background-color: white;\n              border: 5px solid black;\n              margin-bottom: 30px;\n            }\n\n            @media screen and (min-width: 960px){\n              .scoreCont{\n                margin: 30px auto;\n                max-width: 585px;\n              }\n            }\n        `;
                 this.shadow.appendChild(style);
             };
             _state.state.subscribe(()=>{
@@ -880,38 +931,49 @@ function initScoreComp() {
     });
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../state":"50U9u"}],"4uxHe":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../state":"50U9u"}],"3Stbr":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "initCounter", ()=>initCounter
+parcelHelpers.export(exports, "initStarComp", ()=>initStarComp
 );
 var _state = require("../../state");
-function initCounter() {
-    class Counter extends HTMLElement {
+function initStarComp() {
+    customElements.define("star-comp", class extends HTMLElement {
         constructor(){
             super();
-            this.counter = 0;
-            this.render();
-        }
-        render() {
-            const variant = this.getAttribute("variant");
-            const shadow = this.attachShadow({
+            this.shadow = this.attachShadow({
                 mode: "open"
             });
-            const div = document.createElement("div");
-            const style = document.createElement("style");
-            const lastState = _state.state.getState();
-            style.innerHTML = `\n      .choose{\n              height:300px;\n              width: 100%;\n              display: flex;\n              align-items: center;\n              justify-content: center;\n              font-size: 30px;\n            }\n            `;
-            div.textContent = `${lastState.nombre}`;
-            div.className = variant;
-            shadow.appendChild(div);
-            shadow.appendChild(style);
-        //Counter();
+            this.syncWithState = ()=>{
+                const lastState = _state.state.getState();
+                if (lastState.result == "perdi") this.img = require("url:../../img/perdiste.svg");
+                if (lastState.result == "gane") this.img = require("url:../../img/ganaste.svg");
+                if (lastState.result == "empate") this.img = require("url:../../img/empataste.svg");
+                this.render();
+            };
+            this.render = ()=>{
+                this.shadow.innerHTML = `\n          <div class="scoreCont">\n            <img class="starEl" src="${this.img}"/>\n          </div>\n        `;
+                const style = document.createElement("style");
+                style.innerHTML = `\n            .starEl{\n                height: 200px;\n                width: auto;\n                animation:lower 3s linear infinite;\n                z-index: 2;\n            }\n            .scoreCont{\n                height: 245px;\n                width: 100%;\n                display: flex;\n                justify-content: center;\n                align-items: center;\n            }\n            @keyframes lower{\n                0%{\n                    transform: translateY(0%);\n                }\n                50%{\n                  transform: translateY(5%);\n                }\n                100%{\n                  transform: translateY(0%);\n                }\n            }\n        `;
+                this.shadow.appendChild(style);
+            };
+            _state.state.subscribe(()=>{
+                this.syncWithState();
+            });
+            this.syncWithState();
         }
-    }
-    customElements.define("choose-counter", Counter);
+    });
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../state":"50U9u"}]},["1VVWy","2slnh"], "2slnh", "parcelRequirea5a0")
+},{"../../state":"50U9u","url:../../img/perdiste.svg":"1V9iO","url:../../img/ganaste.svg":"68ZiX","url:../../img/empataste.svg":"58i4N","@parcel/transformer-js/src/esmodule-helpers.js":"367CR"}],"1V9iO":[function(require,module,exports) {
+module.exports = require('./bundle-url').getBundleURL() + "perdiste.8a6201e2.svg";
+
+},{"./bundle-url":"3seVR"}],"68ZiX":[function(require,module,exports) {
+module.exports = require('./bundle-url').getBundleURL() + "ganaste.e8059893.svg";
+
+},{"./bundle-url":"3seVR"}],"58i4N":[function(require,module,exports) {
+module.exports = require('./bundle-url').getBundleURL() + "empataste.cea45306.svg";
+
+},{"./bundle-url":"3seVR"}]},["1VVWy","2slnh"], "2slnh", "parcelRequirea5a0")
 
 //# sourceMappingURL=index.a2d33e8d.js.map

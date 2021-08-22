@@ -2,8 +2,9 @@ import { state } from "../../state";
 
 export function initPageResult(params) {
   const div = document.createElement("div");
+
   div.innerHTML = `
-                <h1>Result</h1>
+                <star-comp></star-comp>
                 <score-component></score-component>
                 <custom-button class="return">¡Volver a Jugar!</custom-button>
               `;
@@ -17,7 +18,11 @@ export function initPageResult(params) {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
+      text-align: center;
+    }
+    .imgEl{
+      height: 200px;
+      width: auto;
     }
   `;
   div.className = "container";
