@@ -1,18 +1,16 @@
 {
   "name": "desafio-m5",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "repository": "git@github.com:PabloMur/desafio-m5.git",
   "author": "Pablo Murillo <pablomurillo.sp@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "parcel serve ./src/index.html",
-    "build": "parcel build ./src/index.html"
+    "build": "parcel build ./src/index.html --dist-dir build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "parcel": "^2.0.0-beta.3.1"
-  },
-  "dependencies": {
-    "gh-pages": "^3.2.3"
   }
 }
