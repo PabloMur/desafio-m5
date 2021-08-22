@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+  font-family: "Odibee Sans", cursive;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#root {
+  background: white;
+  background-image: url("c86c7fa546f8a65d8847e581d4e12ee4");
+  height: 100vh;
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.containerManos {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 40vh;
+  width: 100%;
+}
+
+#setUno {
+  transform: translateY(-100%);
+}
+
+#setDos {
+  transform: translateY(100%);
+}

@@ -1,0 +1,1 @@
+module.exports = require('./bundle-url').getBundleURL() + "perdiste.HASH_REF_639a5302ad4fb60121dc74078a6201e2.svg";

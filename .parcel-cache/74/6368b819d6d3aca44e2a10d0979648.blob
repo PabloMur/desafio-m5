@@ -1,0 +1,1 @@
+module.exports = require('./bundle-url').getBundleURL() + "empataste.HASH_REF_b5dae6521fd0f4f69a587ca8cea45306.svg";

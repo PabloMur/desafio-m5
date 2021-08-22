@@ -1,0 +1,13 @@
+function $f5277df30d1130a98548ef3d89a966b2$export$ea0548885334d4a7(params) {
+    const div = document.createElement("div");
+    const style = document.createElement("style");
+    div.className = "welcome";
+    div.innerHTML = `\n            <custom-text variant="title" class="title">\n                Piedra <br/>Papel ó<br/> Tijera\n            </custom-text>\n            <div class="containerManos">\n              <game-item variant="piedra"></game-item>\n              <game-item variant="tijera"></game-item>\n              <game-item variant="papel"></game-item>\n            </div>\n            <custom-button class="start-button">¡Empezar!</custom-button>\n          `;
+    style.innerHTML = `\n    .welcome{\n      height: 100vh;\n      width: 100%;\n      display: flex; \n      flex-direction:column;\n      align-items: center;\n      justify-content: space-around;\n    }\n    \n    .title{\n      animation: fade .6s ease;\n    }\n\n    @keyframes fade{\n      0%{\n        transform: translateY(-100%);\n      }\n      75%{\n        transform: translateY(10%);\n      }\n      100%{\n        transform: translateY(0%);\n      }\n    }\n  `;
+    div.appendChild(style);
+    const button = div.querySelector(".start-button");
+    button.addEventListener("click", function() {
+        params.goTo("/instructions");
+    });
+    return div;
+}

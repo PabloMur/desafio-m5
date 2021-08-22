@@ -1,0 +1,27 @@
+import   "d52976ddd03324c7b65227f3ed01588c:./router";
+import   "d52976ddd03324c7b65227f3ed01588c:./components/button";
+import   "d52976ddd03324c7b65227f3ed01588c:./components/custom-text";
+import   "d52976ddd03324c7b65227f3ed01588c:./components/game-option";
+import   "d52976ddd03324c7b65227f3ed01588c:./components/score";
+import   "d52976ddd03324c7b65227f3ed01588c:./components/star-comp";
+import   "d52976ddd03324c7b65227f3ed01588c:./state";
+(function main() {
+    $d52976ddd03324c7b65227f3ed01588c$import$d6788d9da377fdbf$1713e66270b3a123();
+    $d52976ddd03324c7b65227f3ed01588c$import$740fa11f0732f241$f67cd90db510d4df();
+    $d52976ddd03324c7b65227f3ed01588c$import$b5b928e943d258ae$b6d03ecb2f0666bd();
+    $d52976ddd03324c7b65227f3ed01588c$import$1872139eba5baff3$6a41956e68c23dc6();
+    $d52976ddd03324c7b65227f3ed01588c$import$4544e726c6634e60$8928a4d7e940794c();
+    if (localStorage.getItem("saved-games")) $d52976ddd03324c7b65227f3ed01588c$import$76e5a6330b618eea$c837a8b98c265ae3.init();
+    else $d52976ddd03324c7b65227f3ed01588c$import$76e5a6330b618eea$c837a8b98c265ae3.setState({
+        currentGame: {
+            miJugada: "",
+            PCjugada: ""
+        },
+        history: [],
+        score: {
+            maquina: 0,
+            tu: 0
+        }
+    });
+    $d52976ddd03324c7b65227f3ed01588c$import$c1b686ccb363b496$f03b0d45d4202f55(document.querySelector("#root"));
+})();

@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+  font-family: "Odibee Sans", cursive;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  background: white;
+  background-image: url("fondo.HASH_REF_0c0a3bf5b9d2fd177512cabc228ccc65.svg");
+  height: 100vh;
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  overflow: hidden;
+}
+
+.containerManos {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  height: 40vh;
+  width: 100%;
+  background-color: cadetblue;
+}
+
+/*# sourceMappingURL=index.HASH_REF_b4ebbcb58556b8dda3a95060897d72b3.css.map */

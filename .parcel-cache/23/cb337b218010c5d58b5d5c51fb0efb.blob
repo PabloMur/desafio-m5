@@ -1,0 +1,20 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initPageComparition", ()=>initPageComparition
+);
+var _state = require("../../state");
+function initPageComparition(params) {
+    const result = _state.state.getState();
+    console.log(result);
+    const div = document.createElement("div");
+    div.innerHTML = `\n                <p class="instructions">\n                test\n                ${result.result}\n                tu jugada: ${result.currentGame.miJugada}}\n                </p>\n                <custom-button class="play-button">¡Jugar!</custom-button>\n            `;
+    const style = document.createElement("style");
+    div.className = "contenedor";
+    style.innerHTML = `\n    .contenedor{\n      height: 60vh;\n      display: flex;\n      flex-direction: column;\n      justify-content: space-around;\n      \n    }\n    .instructions{\n      font-size: 45px;\n      display: block;\n      height: auto;\n      max-width: 600px;\n      text-align: center;\n      animation: fade .7s ease;\n    }\n    @keyframes fade{\n      0%{\n        opacity: 0;\n      }\n      100%{\n        opacity: 1;\n      }\n    }\n  `;
+    div.appendChild(style);
+    const playButton = div.querySelector(".play-button");
+    playButton.addEventListener("click", ()=>{
+        params.goTo("/result");
+    });
+    return div;
+}

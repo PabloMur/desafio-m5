@@ -1,0 +1,20 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initPageComparition", ()=>initPageComparition
+);
+var _state = require("../../state");
+function initPageComparition(params) {
+    const result = _state.state.getState();
+    console.log(result);
+    const div = document.createElement("div");
+    div.innerHTML = `\n                <game-item class="pcMove" variant="${result.currentGame.PCjugada}"></game-item>\n                <custom-button class="play-button">¡Jugar!</custom-button>\n                <game-item class="playerMove" variant="${result.currentGame.miJugada}"></game-item>\n                \n            `;
+    const style = document.createElement("style");
+    div.className = "contenedor";
+    style.innerHTML = `\n    .contenedor{\n      height: 60vh;\n      display: flex;\n      flex-direction: column;\n      justify-content: space-around;\n      \n    }\n    \n    .playerMove{\n        margin: 0 auto;\n    }\n    .pcMove{\n        margin: 0 auto;\n        \n        animation: fadeInverted 3s ease;\n    }\n\n    @keyframes fade{\n      0%{\n        transform: translateY(100%);\n      }\n      100%{\n        transform: translateY(0%);\n      }\n    }\n    @keyframes fadeInverted{\n        0%{\n          transform: translateY(-1000%);\n        }\n        100%{\n            transform: rotate(180deg);\n          transform: translateY(0%);\n        }\n      }\n  `;
+    div.appendChild(style);
+    const playButton = div.querySelector(".play-button");
+    playButton.addEventListener("click", ()=>{
+        params.goTo("/result");
+    });
+    return div;
+}

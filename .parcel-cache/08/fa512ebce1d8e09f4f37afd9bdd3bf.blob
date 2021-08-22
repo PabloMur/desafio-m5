@@ -1,0 +1,31 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initStarComp", ()=>initStarComp
+);
+var _state = require("../../state");
+function initStarComp() {
+    customElements.define("star-comp", class extends HTMLElement {
+        constructor(){
+            super();
+            this.shadow = this.attachShadow({
+                mode: "open"
+            });
+            this.syncWithState = ()=>{
+                const lastState = _state.state.getState();
+                if (lastState.result == "perdi") this.img = require("url:../../img/perdiste.svg");
+                else if (lastState.result == "gane") this.img = require("url:../../img/ganaste.svg");
+                this.render();
+            };
+            this.render = ()=>{
+                this.shadow.innerHTML = `\n          <div class="scoreCont">\n            <img class="starEl" src="${this.img}"/>\n          </div>\n        `;
+                const style = document.createElement("style");
+                style.innerHTML = `\n            .starEl{\n                height: 200px;\n                width: auto;\n            }\n            .scoreCont{\n                height: 245px;\n                width: 100%;\n                display: flex;\n                justify-content: center;\n                align-items: center;\n            }\n            @keyframes lower{\n                0%{},\n                50%{},\n                100%{}\n            }\n        `;
+                this.shadow.appendChild(style);
+            };
+            _state.state.subscribe(()=>{
+                this.syncWithState();
+            });
+            this.syncWithState();
+        }
+    });
+}

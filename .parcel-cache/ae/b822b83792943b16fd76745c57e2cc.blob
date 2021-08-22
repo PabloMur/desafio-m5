@@ -1,0 +1,15 @@
+import   "0ab6f62967b024b718d62b31104611fb:../../state";
+function $0ab6f62967b024b718d62b31104611fb$export$34517d25be7c1d65(params) {
+    const div = document.createElement("div");
+    div.innerHTML = `\n                <star-comp></star-comp>\n                <score-component></score-component>\n                <custom-button class="return">¡Volver a Jugar!</custom-button>\n              `;
+    const style = document.createElement("style");
+    style.innerHTML = `\n    .container{\n      height: 100vh;\n      width: 100%;\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      text-align: center;\n    }\n    .imgEl{\n      height: 200px;\n      width: auto;\n    }\n  `;
+    div.className = "container";
+    div.appendChild(style);
+    const retunrButton = div.querySelector(".return");
+    retunrButton.addEventListener("click", ()=>{
+        $0ab6f62967b024b718d62b31104611fb$import$e1bed94edfa07990$c837a8b98c265ae3.pushToHistory($0ab6f62967b024b718d62b31104611fb$import$e1bed94edfa07990$c837a8b98c265ae3.getState().currentGame);
+        params.goTo("/instructions");
+    });
+    return div;
+}

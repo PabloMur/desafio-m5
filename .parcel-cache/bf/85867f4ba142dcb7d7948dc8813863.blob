@@ -1,0 +1,48 @@
+import   "9e876f2cce4bbc7ebf26ded1f367ede6:./pages/welcome";
+import   "9e876f2cce4bbc7ebf26ded1f367ede6:./pages/instructions";
+import   "9e876f2cce4bbc7ebf26ded1f367ede6:./pages/choose";
+import   "9e876f2cce4bbc7ebf26ded1f367ede6:./pages/result";
+import   "9e876f2cce4bbc7ebf26ded1f367ede6:./pages/comparition";
+const $9e876f2cce4bbc7ebf26ded1f367ede6$var$routes = [
+    {
+        path: /\/welcome/,
+        handler: $9e876f2cce4bbc7ebf26ded1f367ede6$import$5370e1339bba31bd$ea0548885334d4a7
+    },
+    {
+        path: /\/instructions/,
+        handler: $9e876f2cce4bbc7ebf26ded1f367ede6$import$9017b80785c1f2a4$f202e9a860838fdf
+    },
+    {
+        path: /\/choose/,
+        handler: $9e876f2cce4bbc7ebf26ded1f367ede6$import$c7d61d8d3ba0321$73142debf2ab3b31
+    },
+    {
+        path: /\/comparition/,
+        handler: $9e876f2cce4bbc7ebf26ded1f367ede6$import$5a96c0aadc77a4ff$219c538293cd33ad
+    },
+    {
+        path: /\/result/,
+        handler: $9e876f2cce4bbc7ebf26ded1f367ede6$import$dd25d08df0ccd102$34517d25be7c1d65
+    }, 
+];
+function $9e876f2cce4bbc7ebf26ded1f367ede6$export$f03b0d45d4202f55(container) {
+    function goTo(path) {
+        history.pushState({
+        }, "", path);
+        handleRoute(path);
+    }
+    function handleRoute(route) {
+        for (const r of $9e876f2cce4bbc7ebf26ded1f367ede6$var$routes)if (r.path.test(route)) {
+            const el = r.handler({
+                goTo: goTo
+            });
+            if (container.firstChild) container.firstChild.remove();
+            container.appendChild(el);
+        }
+    }
+    if (location.pathname == "/" || location.pathname == "/desafio-m5") goTo("/welcome");
+    else handleRoute(location.pathname);
+    window.addEventListener("popstate", ()=>{
+        handleRoute(location.pathname);
+    });
+}

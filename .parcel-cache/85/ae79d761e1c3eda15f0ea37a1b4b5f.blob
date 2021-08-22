@@ -1,0 +1,29 @@
+var $10da859f8926f997eca867931986be87$export$59e5c324fe003148;
+var $10da859f8926f997eca867931986be87$export$da289beea9c5b10d;
+var $10da859f8926f997eca867931986be87$export$1b6c708f518305b4;
+"use strict";
+/* globals document:readonly */ var $10da859f8926f997eca867931986be87$var$bundleURL = null;
+function $10da859f8926f997eca867931986be87$var$getBundleURLCached() {
+    if (!$10da859f8926f997eca867931986be87$var$bundleURL) $10da859f8926f997eca867931986be87$var$bundleURL = $10da859f8926f997eca867931986be87$var$getBundleURL();
+    return $10da859f8926f997eca867931986be87$var$bundleURL;
+}
+function $10da859f8926f997eca867931986be87$var$getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+        if (matches) return $10da859f8926f997eca867931986be87$var$getBaseURL(matches[0]);
+    }
+    return '/';
+}
+function $10da859f8926f997eca867931986be87$var$getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function $10da859f8926f997eca867931986be87$var$getOrigin(url) {
+    let matches = ('' + url).match(/(https?|file|ftp):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+$10da859f8926f997eca867931986be87$export$da289beea9c5b10d = $10da859f8926f997eca867931986be87$var$getBundleURLCached;
+$10da859f8926f997eca867931986be87$export$59e5c324fe003148 = $10da859f8926f997eca867931986be87$var$getBaseURL;
+$10da859f8926f997eca867931986be87$export$1b6c708f518305b4 = $10da859f8926f997eca867931986be87$var$getOrigin;

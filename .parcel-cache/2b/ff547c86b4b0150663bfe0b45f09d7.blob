@@ -1,0 +1,24 @@
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initCustomButton", ()=>initCustomButton
+);
+function initCustomButton() {
+    customElements.define("custom-button", class extends HTMLElement {
+        constructor(){
+            super();
+            this.shadow = this.attachShadow({
+                mode: "open"
+            });
+            this.render();
+        }
+        render() {
+            const button = document.createElement("button");
+            const style = document.createElement("style");
+            button.className = "root";
+            style.innerHTML = `\n              .root{\n                  font-size: 18px;\n                  border-radius: 4px;\n                  padding: 17px 13px;\n                  background-color:#006CFC;\n                  color:#D8FCFC;\n                  width: 90vw;\n                  border: 10px solid #001997;\n                  animation: lower .3s ease ;\n              }\n              @media screen and (min-width: 960px){\n                .root{\n                  max-width: 600px;\n                  margin: 0 auto;\n                }\n              }\n              @keyframes lower{\n                0%{\n                    transform: translateY(100%);\n                }\n                100%{\n                    transform: translateY(0%);\n                }\n            }\n            `;
+            button.textContent = this.textContent || "ups!";
+            this.shadow.appendChild(button);
+            this.shadow.appendChild(style);
+        }
+    });
+}
