@@ -1,2 +1,0 @@
-*{box-sizing:border-box;font-family:Odibee Sans,cursive}body{margin:0;padding:0;overflow:hidden}#root{background:#fff;background-image:url(fondo.b2c1bb93.svg);height:100vh;padding:15px;flex-direction:column;align-items:center;justify-content:space-around}#root,.containerManos{width:100%;display:flex}.containerManos{justify-content:center;align-items:flex-end;height:40vh;transform:translateY(0);animation:showUp s linear .7}@keyframes showUp{0%{opacity:0;transform:translateY(100%)}to{opacity:1;transform:translateY(0)}}
-/*# sourceMappingURL=index.a2c60e43.css.map */
