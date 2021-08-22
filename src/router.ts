@@ -6,23 +6,23 @@ import { initPageComparition } from "./pages/comparition";
 
 const routes = [
   {
-    path: /\/welcome/,
+    path: /\/desafio-m5\/welcome/,
     handler: initPageWelcome,
   },
   {
-    path: /\/instructions/,
+    path: /\/desafio-m5\/instructions/,
     handler: initPageInstructions,
   },
   {
-    path: /\/choose/,
+    path: /\/desafio-m5\/choose/,
     handler: initPageChoose,
   },
   {
-    path: /\/comparition/,
+    path: /\/desafio-m5\/comparition/,
     handler: initPageComparition,
   },
   {
-    path: /\/result/,
+    path: /\/desafio-m5\/result/,
     handler: initPageResult,
   },
 ];
@@ -46,8 +46,8 @@ export function initRouter(container: Element) {
     }
   }
 
-  if (location.pathname == "/" || location.pathname == "/desafio-m5") {
-    goTo("/welcome");
+  if (location.pathname == "/") {
+    goTo("/desafio-m5/welcome");
   } else {
     handleRoute(location.pathname);
   }
